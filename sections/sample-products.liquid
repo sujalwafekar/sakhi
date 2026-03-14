@@ -1,0 +1,363 @@
+{% comment %}
+  Sakhi Baby Store – Sample Featured Products Section
+  Displays hardcoded sample baby products with placeholder images.
+  Replace with real products once your store is set up.
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div style="text-align: center; margin-bottom: 48px;">
+    <h2 style="font-family: var(--sakhi-font-heading, 'Playfair Display', serif); font-size: 36px; font-weight: 600; color: var(--color-foreground-heading); margin-bottom: 12px;">
+      {{ section.settings.heading | default: 'Our Best Sellers' }}
+    </h2>
+    <p style="font-family: var(--sakhi-font-body, 'Lora', serif); color: var(--color-foreground); font-size: 16px; max-width: 480px; margin: 0 auto;">
+      {{ section.settings.subheading | default: 'Most loved by parents everywhere' }}
+    </p>
+    <div style="width: 60px; height: 2px; background: linear-gradient(90deg, #C17A8E, #D4A853); margin: 18px auto 0; border-radius: 2px;"></div>
+  </div>
+
+  <div class="sakhi-products-grid">
+    {% for block in section.blocks %}
+      <div class="sakhi-product-card" {{ block.shopify_attributes }}>
+        <div class="sakhi-product-image">
+          {% if block.settings.badge != blank %}
+            <span class="sakhi-product-badge">{{ block.settings.badge }}</span>
+          {% endif %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag: alt: block.settings.title, class: 'sakhi-product-img' }}
+          {% else %}
+            <div class="sakhi-product-placeholder">
+              {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'sakhi-product-svg' }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="sakhi-product-info">
+          <h3 class="sakhi-product-title">{{ block.settings.title }}</h3>
+          <div class="sakhi-product-price">
+            {% if block.settings.compare_price != blank %}
+              <span class="sakhi-price-compare">{{ block.settings.compare_price }}</span>
+            {% endif %}
+            <span class="sakhi-price-current">{{ block.settings.price }}</span>
+          </div>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="sakhi-product-btn">View Product</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="{{ section.settings.view_all_link | default: '/collections/all' }}" class="button" style="background: var(--color-primary-button-background); color: var(--color-primary-button-text); border-radius: 28px; padding: 14px 40px; text-decoration: none; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;">
+      {{ section.settings.view_all_text | default: 'View All Products' }}
+    </a>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sakhi-products-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      padding: 0;
+    }
+  }
+
+  .sakhi-product-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #F0E4DC;
+    background: #FFFFFF;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sakhi-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(44, 34, 32, 0.1);
+    border-color: #C17A8E;
+  }
+
+  .sakhi-product-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #FFF8F3;
+  }
+
+  .sakhi-product-img,
+  .sakhi-product-svg,
+  .sakhi-product-placeholder svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sakhi-product-card:hover .sakhi-product-img,
+  .sakhi-product-card:hover .sakhi-product-placeholder svg {
+    transform: scale(1.06);
+  }
+
+  .sakhi-product-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFF0F3, #F5F0FF);
+  }
+
+  .sakhi-product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #C17A8E;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 14px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .sakhi-product-info {
+    padding: 16px;
+  }
+
+  .sakhi-product-title {
+    font-family: var(--font-heading--family);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-foreground-heading);
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .sakhi-product-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .sakhi-price-current {
+    font-family: var(--font-body--family);
+    color: #A8637A;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .sakhi-price-compare {
+    font-family: var(--font-body--family);
+    color: #999;
+    font-size: 14px;
+    text-decoration: line-through;
+  }
+
+  .sakhi-product-btn {
+    display: inline-block;
+    color: #C17A8E;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid #C17A8E;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .sakhi-product-btn:hover {
+    color: #D4A853;
+    border-color: #D4A853;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sample Products",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Most loved by parents everywhere"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "Button text",
+      "default": "View All Products"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Sample Product"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹899"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at price"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sample Products",
+      "category": "Products",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Organic Cotton Onesie",
+            "price": "₹799",
+            "compare_price": "₹999",
+            "badge": "Sale"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Floral Frock Set",
+            "price": "₹1,299",
+            "badge": "New"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Baby Boy Kurta Pajama",
+            "price": "₹1,499"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Muslin Swaddle Blanket",
+            "price": "₹599",
+            "compare_price": "₹899",
+            "badge": "Best Seller"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Embroidered Romper",
+            "price": "₹1,099"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Cotton Lehenga Set",
+            "price": "₹1,899",
+            "badge": "Premium"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Nightsuit Twin Pack",
+            "price": "₹1,199",
+            "compare_price": "₹1,499"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Hand-Knit Booties",
+            "price": "₹499",
+            "badge": "Trending"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
