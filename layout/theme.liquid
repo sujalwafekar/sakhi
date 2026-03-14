@@ -27,6 +27,7 @@
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {{ 'sakhi-redesign.css' | asset_url | stylesheet_tag }}
+    {{ 'sakhi-animations.css' | asset_url | stylesheet_tag }}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
@@ -142,5 +143,7 @@
       {% render 'ai-tryon-modal' %}
       <script src="{{ 'ai-tryon.js' | asset_url }}" defer="defer"></script>
     {% endif %}
+
+    <script src="{{ 'sakhi-animations.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

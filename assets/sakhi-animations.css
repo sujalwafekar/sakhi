@@ -1,0 +1,448 @@
+/* ════════════════════════════════════════════════════════════════
+   SAKHI ANIMATIONS CSS — Particles, scroll reveals, 
+   fly-to-cart, confetti, animated backgrounds
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Animated Gradient Background ────────────────────────────── */
+body {
+    background: linear-gradient(135deg,
+            #FFF8F3 0%,
+            #FFF0F3 25%,
+            #F5F0FF 50%,
+            #FFF8F3 75%,
+            #F0F7F0 100%) !important;
+    background-size: 400% 400% !important;
+    animation: sakhi-bg-shift 20s ease infinite;
+}
+
+@keyframes sakhi-bg-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ── Floating Particles ──────────────────────────────────────── */
+.sakhi-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.sakhi-particle {
+    position: absolute;
+    bottom: -20px;
+    animation: sakhi-float-up linear infinite;
+    opacity: 0.6;
+    will-change: transform;
+}
+
+@keyframes sakhi-float-up {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(var(--drift, 50px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ── Cursor Sparkle Trail ────────────────────────────────────── */
+.sakhi-sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    z-index: 99999;
+    border-radius: 50%;
+    background: radial-gradient(circle, #D4A853, #C17A8E);
+    animation: sakhi-sparkle-pop 0.8s ease-out forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes sakhi-sparkle-pop {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        box-shadow: 0 0 6px #D4A853, 0 0 12px rgba(212, 168, 83, 0.4);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        box-shadow: 0 0 0px transparent;
+    }
+}
+
+/* ── Scroll Reveal Animations ────────────────────────────────── */
+.sakhi-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sakhi-reveal.sakhi-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.sakhi-stagger {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sakhi-stagger.sakhi-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ── Add-to-Cart Button Pulse ────────────────────────────────── */
+.sakhi-cart-pulse {
+    animation: sakhi-pulse 0.6s ease-out !important;
+}
+
+@keyframes sakhi-pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(0.92);
+    }
+
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 20px rgba(193, 122, 142, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 transparent;
+    }
+}
+
+/* ── Fly-to-Cart ─────────────────────────────────────────────── */
+.sakhi-fly-to-cart {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    z-index: 100000;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(193, 122, 142, 0.4);
+    border: 2px solid #D4A853;
+    animation: sakhi-fly 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes sakhi-fly {
+    0% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(0.8) translate(-50%, calc(-50% - 80px));
+        opacity: 0.9;
+    }
+
+    100% {
+        left: var(--cart-x) !important;
+        top: var(--cart-y) !important;
+        transform: scale(0.15) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+/* ── Cart Icon Bounce ────────────────────────────────────────── */
+.sakhi-cart-bounce {
+    animation: sakhi-bounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+@keyframes sakhi-bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.4);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ── Confetti Burst ──────────────────────────────────────────── */
+.sakhi-confetti {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100001;
+    animation: sakhi-confetti-pop 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes sakhi-confetti-pop {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 40px)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ── Hero Parallax ───────────────────────────────────────────── */
+.hero .hero__media-grid {
+    transition: transform 0.1s linear;
+}
+
+.hero .hero__media,
+.hero img {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ── Section Heading Glow Animation ──────────────────────────── */
+.sakhi-products-grid+div .button,
+.section-heading,
+.section__heading,
+.sakhi-category-title,
+h2 {
+    position: relative;
+}
+
+/* ── Animated border on hover for product cards ──────────────── */
+.sakhi-product-card::before,
+.product-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #C17A8E, #D4A853, #9B7DC4, #C17A8E);
+    background-size: 300% 300%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.sakhi-product-card:hover::before,
+.product-card:hover::before {
+    opacity: 1;
+    animation: sakhi-border-glow 3s linear infinite;
+}
+
+@keyframes sakhi-border-glow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ── Shimmer loading effect for images ───────────────────────── */
+.sakhi-product-image::before,
+.product-card__image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 248, 243, 0.4) 50%,
+            transparent 100%);
+    background-size: 200% 100%;
+    animation: sakhi-shimmer 2s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.sakhi-product-card:hover .sakhi-product-image::before,
+.product-card:hover .product-card__image-wrapper::before {
+    opacity: 1;
+}
+
+@keyframes sakhi-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ── Announcement bar slide animation ────────────────────────── */
+[class*="announcement"] {
+    animation: sakhi-announcement-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes sakhi-announcement-glow {
+    0% {
+        background: linear-gradient(135deg, #2C2220 0%, #3A302D 100%);
+    }
+
+    100% {
+        background: linear-gradient(135deg, #3A302D 0%, #2C2220 50%, #C17A8E22 100%);
+    }
+}
+
+/* ── Glowing badge animation ─────────────────────────────────── */
+.sakhi-product-badge,
+.badge--sale {
+    animation: sakhi-badge-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sakhi-badge-glow {
+    0% {
+        box-shadow: 0 0 4px rgba(193, 122, 142, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 12px rgba(193, 122, 142, 0.6);
+    }
+}
+
+/* ── Category circle hover ripple ────────────────────────────── */
+.sakhi-category-image::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all 0.4s ease;
+}
+
+.sakhi-category-card:hover .sakhi-category-image::after {
+    border-color: rgba(193, 122, 142, 0.4);
+    inset: -10px;
+    animation: sakhi-ripple 1.5s ease-out infinite;
+}
+
+@keyframes sakhi-ripple {
+    0% {
+        inset: -4px;
+        opacity: 1;
+        border-color: rgba(193, 122, 142, 0.4);
+    }
+
+    100% {
+        inset: -20px;
+        opacity: 0;
+        border-color: rgba(193, 122, 142, 0);
+    }
+}
+
+/* ── Button shine effect ─────────────────────────────────────── */
+.button::after,
+.btn::after,
+.btn-ai::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(105deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.25) 50%,
+            transparent 70%);
+    background-size: 300% 100%;
+    animation: sakhi-btn-shine 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes sakhi-btn-shine {
+    0% {
+        background-position: 300% 0;
+    }
+
+    50% {
+        background-position: -100% 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
+}
+
+/* ── Footer wave divider ─────────────────────────────────────── */
+footer::before,
+.footer::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,35 400,5 600,20 C800,35 1000,5 1200,20 L1200,40 L0,40 Z' fill='%232C2220'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+    margin-bottom: -1px;
+}
+
+/* ── Prefers reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    .sakhi-particles,
+    .sakhi-sparkle {
+        display: none !important;
+    }
+
+    body {
+        animation: none !important;
+    }
+}
