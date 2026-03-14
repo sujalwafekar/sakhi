@@ -1,0 +1,720 @@
+/* ════════════════════════════════════════════════════════════════
+   SAKHI BABY STORE – Premium Visual Redesign Override
+   Inspired by: Sakhi Collections (luxury) + Lavanda Style (soft)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ── CSS Custom Properties ───────────────────────────────────── */
+:root {
+    /* Brand Colors */
+    --sakhi-blush: #C17A8E;
+    --sakhi-blush-light: #FFF0F3;
+    --sakhi-blush-dark: #A8637A;
+    --sakhi-gold: #D4A853;
+    --sakhi-gold-light: #F5E6C8;
+    --sakhi-gold-dark: #C49A3D;
+    --sakhi-lavender: #9B7DC4;
+    --sakhi-mint: #7BAE7F;
+    --sakhi-cream: #FFF8F3;
+    --sakhi-warm-dark: #2C2220;
+    --sakhi-warm-gray: #4A3F3A;
+    --sakhi-border: #F0E4DC;
+
+    /* Typography */
+    --sakhi-font-heading: 'Playfair Display', Georgia, serif;
+    --sakhi-font-body: 'Lora', Georgia, serif;
+
+    /* Spacing */
+    --sakhi-section-gap: 72px;
+
+    /* Transitions */
+    --sakhi-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --sakhi-transition: all 0.35s var(--sakhi-ease);
+}
+
+/* ── Global Body & Typography ────────────────────────────────── */
+body {
+    font-family: var(--sakhi-font-body) !important;
+    color: var(--sakhi-warm-gray);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4,
+[class*="heading"],
+.section-heading,
+.hero__heading,
+.slideshow__heading {
+    font-family: var(--sakhi-font-heading) !important;
+    color: var(--sakhi-warm-dark);
+    letter-spacing: -0.01em;
+}
+
+h1,
+.h1 {
+    font-weight: 700;
+}
+
+h2,
+.h2 {
+    font-weight: 600;
+}
+
+h3,
+.h3 {
+    font-weight: 600;
+}
+
+p,
+li,
+span,
+a,
+label,
+input,
+textarea,
+select,
+td,
+th {
+    font-family: var(--sakhi-font-body);
+}
+
+/* ── Announcement Bar ────────────────────────────────────────── */
+.announcement-bar,
+[class*="announcement"] {
+    background: linear-gradient(135deg, var(--sakhi-blush) 0%, var(--sakhi-lavender) 100%) !important;
+    color: #FFFFFF !important;
+    font-family: var(--sakhi-font-body);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+.announcement-bar a,
+.announcement-bar span,
+[class*="announcement"] a,
+[class*="announcement"] span {
+    color: #FFFFFF !important;
+}
+
+/* ── Header & Navigation ─────────────────────────────────────── */
+header-component,
+.header,
+.header-section,
+[class*="header"] header {
+    background: rgba(255, 248, 243, 0.97) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--sakhi-border) !important;
+    box-shadow: 0 1px 20px rgba(44, 34, 32, 0.04) !important;
+}
+
+.header__row {
+    padding-block: 12px;
+}
+
+/* Logo area */
+.header__logo img,
+.header__logo svg {
+    transition: var(--sakhi-transition);
+}
+
+.header__logo:hover img,
+.header__logo:hover svg {
+    transform: scale(1.03);
+}
+
+/* Navigation links */
+.header__menu a,
+.header-menu__link,
+nav a {
+    font-family: var(--sakhi-font-body) !important;
+    font-size: 14px !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sakhi-warm-dark) !important;
+    transition: var(--sakhi-transition);
+    position: relative;
+}
+
+.header__menu a:hover,
+.header-menu__link:hover,
+nav a:hover {
+    color: var(--sakhi-blush) !important;
+}
+
+/* Header icons */
+.header__icon .svg-wrapper,
+.header__icons .svg-wrapper {
+    transition: var(--sakhi-transition);
+}
+
+.header__icon:hover .svg-wrapper,
+.header__icons button:hover .svg-wrapper {
+    color: var(--sakhi-blush);
+    transform: scale(1.1);
+}
+
+/* ── Hero / Slideshow Sections ────────────────────────────────── */
+.hero,
+.slideshow,
+[class*="hero"],
+[class*="slideshow"] {
+    border-radius: 0 !important;
+}
+
+.hero__heading,
+.slideshow__heading,
+.hero h1,
+.hero h2 {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 700;
+    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hero__text,
+.slideshow__text {
+    font-family: var(--sakhi-font-body);
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Hero CTA buttons */
+.hero .button,
+.slideshow .button,
+.hero__button,
+.slideshow__button {
+    border-radius: 28px !important;
+    padding: 14px 36px !important;
+    font-family: var(--sakhi-font-body) !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    font-weight: 600;
+    transition: var(--sakhi-transition);
+    box-shadow: 0 4px 15px rgba(193, 122, 142, 0.25);
+}
+
+.hero .button:hover,
+.slideshow .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(193, 122, 142, 0.35);
+}
+
+/* ── Section Headings ────────────────────────────────────────── */
+.section-heading,
+.section__heading,
+[class*="section"] h2,
+.collection-list__heading {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 600;
+    position: relative;
+    text-align: center;
+}
+
+/* Elegant underline accent for section headings */
+.section-heading::after,
+.section__heading::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sakhi-blush), var(--sakhi-gold));
+    margin: 14px auto 0;
+    border-radius: 2px;
+}
+
+/* ── Product Cards ───────────────────────────────────────────── */
+.product-card,
+.card,
+[class*="product-card"] {
+    border-radius: 12px !important;
+    overflow: hidden;
+    transition: var(--sakhi-transition);
+    border: 1px solid var(--sakhi-border) !important;
+    background: #FFFFFF !important;
+}
+
+.product-card:hover,
+.card:hover,
+[class*="product-card"]:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(44, 34, 32, 0.1) !important;
+    border-color: var(--sakhi-blush) !important;
+}
+
+/* Product images */
+.product-card__image-wrapper,
+.card__image-wrapper,
+[class*="product-card"] img {
+    transition: transform 0.6s var(--sakhi-ease);
+}
+
+.product-card:hover .product-card__image-wrapper img,
+.product-card:hover img,
+.card:hover img {
+    transform: scale(1.06);
+}
+
+/* Product titles */
+.product-card__title,
+.card__title,
+.product-card__title a {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 500;
+    font-size: 16px !important;
+    color: var(--sakhi-warm-dark);
+    transition: var(--sakhi-transition);
+}
+
+.product-card:hover .product-card__title a,
+.card:hover .card__title {
+    color: var(--sakhi-blush);
+}
+
+/* Product prices */
+.product-card__price,
+.price,
+.price__regular,
+.product-card .price {
+    font-family: var(--sakhi-font-body);
+    color: var(--sakhi-blush-dark) !important;
+    font-weight: 600;
+}
+
+/* Sale badge */
+.badge--sale,
+.badge[class*="sale"] {
+    background: var(--sakhi-blush) !important;
+    color: #FFFFFF !important;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 100px !important;
+    padding: 4px 12px;
+}
+
+.badge--sold-out,
+.badge[class*="sold-out"] {
+    background: var(--sakhi-warm-gray) !important;
+    color: #FFFFFF !important;
+    border-radius: 100px !important;
+}
+
+/* ── Collection Links / Circular Categories (Sakhi-style) ──── */
+.collection-links,
+.collection-list,
+[class*="collection-link"] {
+    text-align: center;
+}
+
+.collection-links__item img,
+.collection-list__item img {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 3px solid var(--sakhi-border);
+    transition: var(--sakhi-transition);
+    box-shadow: 0 4px 20px rgba(44, 34, 32, 0.06);
+}
+
+.collection-links__item:hover img,
+.collection-list__item:hover img {
+    border-color: var(--sakhi-blush);
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(193, 122, 142, 0.2);
+}
+
+.collection-links__item a,
+.collection-list__item a,
+.collection-links__title,
+.collection-list__title {
+    font-family: var(--sakhi-font-body) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 12px !important;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark);
+    margin-top: 14px;
+    display: block;
+}
+
+/* ── Buttons (Global) ────────────────────────────────────────── */
+.button,
+button[type="submit"],
+.btn,
+input[type="submit"] {
+    font-family: var(--sakhi-font-body) !important;
+    border-radius: 28px !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    transition: var(--sakhi-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover,
+button[type="submit"]:hover,
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(193, 122, 142, 0.2);
+}
+
+.button:active,
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Primary button override */
+.button--primary,
+.button:not(.button--secondary):not(.button-unstyled) {
+    background: var(--sakhi-blush) !important;
+    border-color: var(--sakhi-blush) !important;
+    color: #FFFFFF !important;
+}
+
+.button--primary:hover,
+.button:not(.button--secondary):not(.button-unstyled):hover {
+    background: var(--sakhi-blush-dark) !important;
+    border-color: var(--sakhi-blush-dark) !important;
+}
+
+/* ── AI Try-On Button (Special Sparkle Style) ────────────────── */
+.btn-ai,
+[onclick*="openAiTryon"] {
+    background: linear-gradient(135deg, var(--sakhi-gold) 0%, var(--sakhi-blush) 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 28px !important;
+    padding: 14px 28px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: var(--sakhi-font-body) !important;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: var(--sakhi-transition);
+    box-shadow: 0 4px 20px rgba(212, 168, 83, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-ai:hover,
+[onclick*="openAiTryon"]:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(212, 168, 83, 0.45);
+    background: linear-gradient(135deg, var(--sakhi-blush) 0%, var(--sakhi-gold) 100%) !important;
+}
+
+/* ── Product Page ────────────────────────────────────────────── */
+.product__title,
+.product-information h1 {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 700;
+    font-size: 32px !important;
+    color: var(--sakhi-warm-dark);
+}
+
+.product__price,
+.product-information .price {
+    font-family: var(--sakhi-font-body);
+    font-size: 22px !important;
+    color: var(--sakhi-blush-dark) !important;
+    font-weight: 600;
+}
+
+.product__description,
+.product-information .rte {
+    font-family: var(--sakhi-font-body);
+    line-height: 1.8;
+    color: var(--sakhi-warm-gray);
+}
+
+/* Add to cart button special */
+.add-to-cart-button,
+[class*="add-to-cart"] {
+    background: var(--sakhi-blush) !important;
+    border: 2px solid var(--sakhi-blush) !important;
+    color: #FFFFFF !important;
+    border-radius: 28px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: var(--sakhi-transition);
+}
+
+.add-to-cart-button:hover,
+[class*="add-to-cart"]:hover {
+    background: var(--sakhi-blush-dark) !important;
+    border-color: var(--sakhi-blush-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(193, 122, 142, 0.3);
+}
+
+/* ── Cart Drawer ─────────────────────────────────────────────── */
+.cart-drawer,
+.dialog-drawer {
+    border-radius: 0;
+}
+
+.cart-drawer h2,
+.cart-drawer__title {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 600;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+footer,
+.footer,
+[class*="footer"] section {
+    background: var(--sakhi-warm-dark) !important;
+    color: #F0E4DC !important;
+}
+
+footer h2,
+footer h3,
+footer h4,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer__heading {
+    font-family: var(--sakhi-font-heading) !important;
+    color: var(--sakhi-gold) !important;
+    font-weight: 600;
+}
+
+footer a,
+.footer a {
+    color: #F0E4DC !important;
+    transition: var(--sakhi-transition);
+}
+
+footer a:hover,
+.footer a:hover {
+    color: var(--sakhi-gold) !important;
+}
+
+footer input[type="email"],
+.footer input[type="email"],
+.footer__newsletter input {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(240, 228, 220, 0.2) !important;
+    border-radius: 28px !important;
+    color: #F0E4DC !important;
+    padding: 12px 20px;
+}
+
+footer input[type="email"]::placeholder,
+.footer input[type="email"]::placeholder {
+    color: rgba(240, 228, 220, 0.5) !important;
+}
+
+.footer__newsletter button,
+footer form button {
+    background: var(--sakhi-gold) !important;
+    color: var(--sakhi-warm-dark) !important;
+    border: none !important;
+    border-radius: 28px !important;
+}
+
+.footer__newsletter button:hover,
+footer form button:hover {
+    background: var(--sakhi-gold-light) !important;
+}
+
+/* Footer bottom/copyright */
+.footer__bottom,
+.footer-utilities,
+.copyright {
+    border-top: 1px solid rgba(240, 228, 220, 0.15) !important;
+    color: rgba(240, 228, 220, 0.6) !important;
+}
+
+/* ── Form Inputs ─────────────────────────────────────────────── */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+textarea,
+select {
+    font-family: var(--sakhi-font-body) !important;
+    border-radius: 8px !important;
+    border-color: var(--sakhi-border) !important;
+    transition: var(--sakhi-transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--sakhi-blush) !important;
+    box-shadow: 0 0 0 3px rgba(193, 122, 142, 0.1) !important;
+    outline: none;
+}
+
+/* ── Marquee / Testimonials ──────────────────────────────────── */
+.marquee,
+[class*="marquee"] {
+    font-family: var(--sakhi-font-heading) !important;
+}
+
+/* ── Password Page ───────────────────────────────────────────── */
+.password {
+    font-family: var(--sakhi-font-body);
+}
+
+.password h1,
+.password__heading {
+    font-family: var(--sakhi-font-heading) !important;
+    font-weight: 700;
+}
+
+.password .button {
+    background: var(--sakhi-blush) !important;
+    border-color: var(--sakhi-blush) !important;
+    border-radius: 28px !important;
+}
+
+/* ── Breadcrumbs ─────────────────────────────────────────────── */
+.breadcrumbs,
+.breadcrumb {
+    font-family: var(--sakhi-font-body);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+
+.breadcrumbs a:hover {
+    color: var(--sakhi-blush);
+}
+
+/* ── Sections General Spacing ────────────────────────────────── */
+.shopify-section+.shopify-section {
+    margin-top: 0;
+}
+
+.section {
+    padding-block: var(--sakhi-section-gap);
+}
+
+/* ── Scrollbar Styling ───────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--sakhi-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sakhi-blush);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sakhi-blush-dark);
+}
+
+/* ── Selection Highlight ─────────────────────────────────────── */
+::selection {
+    background: var(--sakhi-blush-light);
+    color: var(--sakhi-warm-dark);
+}
+
+/* ── Smooth scroll ───────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ── Responsive Polish ───────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+    :root {
+        --sakhi-section-gap: 48px;
+    }
+
+    .hero__heading,
+    .slideshow__heading {
+        font-size: 28px !important;
+    }
+
+    .product-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .btn-ai,
+    [onclick*="openAiTryon"] {
+        font-size: 13px !important;
+        padding: 12px 20px !important;
+    }
+}
+
+/* ── Subtle loading animation for images ─────────────────────── */
+@keyframes sakhi-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card,
+.card,
+.collection-links__item,
+.collection-list__item {
+    animation: sakhi-fade-in 0.5s var(--sakhi-ease) both;
+}
+
+/* Stagger cards */
+.product-card:nth-child(1),
+.card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.product-card:nth-child(2),
+.card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.product-card:nth-child(3),
+.card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.product-card:nth-child(4),
+.card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.product-card:nth-child(5),
+.card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.product-card:nth-child(6),
+.card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.product-card:nth-child(7),
+.card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.product-card:nth-child(8),
+.card:nth-child(8) {
+    animation-delay: 0.4s;
+}
