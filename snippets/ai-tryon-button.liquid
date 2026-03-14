@@ -1,0 +1,16 @@
+{% comment %}
+  Reusable AI Try-On button snippet
+  Accepts:
+  - product: {Object} Product
+{% endcomment %}
+
+{% if settings.ai_tryon_enabled %}
+  {% assign product_image_url = product.featured_image | image_url: width: 800 %}
+  <button
+    class="btn btn-ai btn-sm"
+    onclick="openAiTryon({ title: {{ product.title | json }}, image: '{{ product_image_url }}' })"
+    aria-label="{{ settings.ai_tryon_button_label | default: '👶 Try on Your Baby' }} for {{ product.title | escape }}"
+  >
+    {{ settings.ai_tryon_button_label | default: '👶 Try on Your Baby' }}
+  </button>
+{% endif %}

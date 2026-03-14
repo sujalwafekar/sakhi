@@ -1,0 +1,188 @@
+<section class="ai-page-hero">
+  <div class="container">
+    <h1>✨ Baby AI <span>Try-On</span></h1>
+    <p>Upload your baby's photo and see them in any outfit from our store — powered by Google Gemini AI</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:8px 20px;font-size:0.82rem;color:rgba(255,255,255,0.8);">📸 Upload Photo</div>
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:8px 20px;font-size:0.82rem;color:rgba(255,255,255,0.8);">→ AI Magic</div>
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:8px 20px;font-size:0.82rem;color:rgba(255,255,255,0.8);">🎉 See Your Baby in the Outfit!</div>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="position:relative;z-index:2;margin-top:-40px;padding-bottom:80px;">
+  <div class="ai-full-tool">
+    <h2 style="font-family:var(--font-heading);text-align:center;margin-bottom:8px;font-size:1.5rem;">Try On Any Outfit</h2>
+    <p style="text-align:center;color:#888;font-size:0.88rem;margin-bottom:28px;">Select a product from our store, then upload your baby's photo below</p>
+
+    <!-- Product Selector -->
+    <div style="margin-bottom:24px;">
+      <label style="display:block;font-size:0.82rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#888;margin-bottom:8px;">Step 1: Choose a Product</label>
+      <div id="page-product-preview" style="display:none;background:#fafafa;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:center;">
+        <img id="page-product-img" src="" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+        <div>
+          <div id="page-product-title" style="font-weight:600;font-size:0.9rem;"></div>
+          <a href="/collections/all" style="font-size:0.78rem;color:var(--color-primary);">Change product →</a>
+        </div>
+      </div>
+      <a href="/collections/all" class="btn btn-secondary btn-sm btn-full" id="page-select-product-btn">
+        🛍️ Browse Products to Try On
+      </a>
+    </div>
+
+    <!-- Upload Zone -->
+    <div style="margin-bottom:24px;">
+      <label style="display:block;font-size:0.82rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#888;margin-bottom:8px;">Step 2: Upload Baby Photo</label>
+      <div
+        id="page-upload-zone"
+        class="ai-upload-zone"
+        onclick="document.getElementById('page-baby-photo').click()"
+      >
+        <div class="ai-upload-icon">📷</div>
+        <p class="ai-upload-title">Click or drag your baby's photo here</p>
+        <p class="ai-upload-hint">JPG or PNG · Max 5MB</p>
+        <input type="file" id="page-baby-photo" accept="image/*" style="display:none;" onchange="handlePagePhotoUpload(event)">
+      </div>
+      <div id="page-baby-preview-wrap" style="display:none;margin-top:12px;">
+        <img id="page-baby-preview" style="width:100%;max-height:240px;object-fit:cover;border-radius:12px;border:2px solid rgba(168,85,247,0.2);" alt="Baby preview">
+      </div>
+    </div>
+
+    <!-- Generate -->
+    <button id="page-generate-btn" class="btn btn-ai btn-full" onclick="generatePageTryon()" style="display:none;">
+      ✨ Generate AI Look — See Your Baby in This Outfit!
+    </button>
+
+    <!-- Loading -->
+    <div id="page-loading" class="ai-loading" style="display:none;">
+      <div class="ai-spinner"></div>
+      <p class="ai-loading-text">Our AI is styling your baby…</p>
+      <p class="ai-loading-sub">Usually takes 5–15 seconds ✨</p>
+    </div>
+
+    <!-- Result -->
+    <div id="page-result" class="ai-result" style="display:none;margin-top:24px;">
+      <div class="ai-result-label">✨ AI Generated Look</div>
+      <img id="page-result-img" class="ai-result-img" alt="AI try-on result">
+      <div class="ai-result-actions">
+        <a id="page-download-btn" href="#" download="little-bliss-tryon.png" class="btn btn-primary">⬇️ Download</a>
+        <button onclick="resetPageTryon()" class="btn btn-secondary">🔄 New Try-On</button>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="page-error" class="ai-error" style="display:none;margin-top:16px;">
+      <div class="ai-error-icon">😕</div>
+      <p id="page-error-msg" class="ai-error-text">Something went wrong.</p>
+      <button onclick="resetPageTryon()" class="btn btn-secondary btn-sm" style="margin-top:12px;">Try Again</button>
+    </div>
+
+    {% unless settings.gemini_api_key and settings.gemini_api_key != blank %}
+      <div class="ai-error" style="margin-top:16px;">
+        <div class="ai-error-icon">🔑</div>
+        <p class="ai-error-text">Gemini API key not configured. Go to <strong>Shopify Admin → Themes → Customize → Theme Settings → AI Try-On</strong> to add your key.</p>
+      </div>
+    {% endunless %}
+
+    <!-- Notice -->
+    <p style="text-align:center;font-size:0.75rem;color:#bbb;margin-top:24px;">
+      Powered by Google Gemini AI · Your photos are not stored on our servers · For fun preview only
+    </p>
+  </div>
+</div>
+
+<script>
+  var pageBabyPhotoBase64 = '';
+  var pageBabyPhotoMime = 'image/jpeg';
+  var pageProductData = { title: '', image: '' };
+
+  // Read product from URL param (set when clicking try-on from product page)
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var pTitle = params.get('product');
+    var pImg = params.get('img');
+    if (pTitle && pImg) {
+      pageProductData = { title: decodeURIComponent(pTitle), image: decodeURIComponent(pImg) };
+      var titleEl = document.getElementById('page-product-title');
+      var imgEl = document.getElementById('page-product-img');
+      var wrap = document.getElementById('page-product-preview');
+      var btn = document.getElementById('page-select-product-btn');
+      if (titleEl) titleEl.textContent = pageProductData.title;
+      if (imgEl) imgEl.src = pageProductData.image;
+      if (wrap) wrap.style.display = 'flex';
+      if (btn) btn.textContent = '🔄 Change Product';
+    }
+  })();
+
+  function handlePagePhotoUpload(e) {
+    var file = e.target.files[0]; if (!file) return;
+    if (file.size > 5*1024*1024) { alert('Photo too large (max 5MB)'); return; }
+    pageBabyPhotoMime = file.type;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      pageBabyPhotoBase64 = ev.target.result.split(',')[1];
+      var preview = document.getElementById('page-baby-preview');
+      var wrap = document.getElementById('page-baby-preview-wrap');
+      var zone = document.getElementById('page-upload-zone');
+      if (preview) preview.src = ev.target.result;
+      if (wrap) wrap.style.display = 'block';
+      if (zone) zone.style.display = 'none';
+      document.getElementById('page-generate-btn').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function generatePageTryon() {
+    var apiKey = window.LITTLE_BLISS && window.LITTLE_BLISS.geminiApiKey;
+    if (!apiKey) { document.getElementById('page-error-msg').textContent = 'API key not configured.'; showEl('page-error', true); return; }
+    if (!pageBabyPhotoBase64) return;
+
+    showEl('page-generate-btn', false); showEl('page-loading', true);
+    var productName = pageProductData.title || 'this baby outfit';
+    var prompt = 'Generate a cute, realistic, fun illustration-style image showing a baby wearing "' + productName + '". The baby in the reference photo is the subject. Keep facial features and expression. Warm, playful image for a baby clothing store. Outfit clearly visible. No text or watermarks.';
+
+    try {
+      var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=' + apiKey;
+      var resp = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ contents:[{ parts:[{ inline_data:{ mime_type: pageBabyPhotoMime, data: pageBabyPhotoBase64 } }, { text: prompt }] }], generationConfig:{ responseModalities:['TEXT','IMAGE'] } }) });
+      if (!resp.ok) { var ed = await resp.json().catch(()=>({})); throw new Error((ed.error&&ed.error.message)||'API Error '+resp.status); }
+      var data = await resp.json();
+      var imgPart = null;
+      (data.candidates||[]).forEach(function(c){ (c.content&&c.content.parts||[]).forEach(function(p){ if(p.inline_data&&!imgPart) imgPart=p.inline_data; }); });
+      if (!imgPart) throw new Error('No image generated by AI.');
+      var dataUrl = 'data:'+imgPart.mime_type+';base64,'+imgPart.data;
+      document.getElementById('page-result-img').src = dataUrl;
+      document.getElementById('page-download-btn').href = dataUrl;
+      showEl('page-loading', false); showEl('page-result', true);
+    } catch(err) {
+      showEl('page-loading', false);
+      document.getElementById('page-error-msg').textContent = err.message || 'Something went wrong.';
+      showEl('page-error', true);
+    }
+  }
+
+  function resetPageTryon() {
+    pageBabyPhotoBase64=''; pageBabyPhotoMime='image/jpeg';
+    document.getElementById('page-baby-photo').value='';
+    showEl('page-baby-preview-wrap', false);
+    showEl('page-upload-zone', true);
+    showEl('page-generate-btn', false);
+    showEl('page-result', false);
+    showEl('page-error', false);
+    showEl('page-loading', false);
+  }
+
+  function showEl(id, vis) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = vis ? 'block' : 'none';
+  }
+</script>
+
+{% schema %}
+{
+  "name": "AI Try-On Tool",
+  "settings": [],
+  "presets": [
+    { "name": "AI Try-On Tool" }
+  ]
+}
+{% endschema %}

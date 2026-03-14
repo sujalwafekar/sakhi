@@ -1,0 +1,86 @@
+<!-- AI Try-On Modal Overlay -->
+<div id="ai-tryon-modal" class="ai-modal-overlay" role="dialog" aria-modal="true" aria-label="AI Baby Try-On" style="display:none;">
+  <div class="ai-modal-backdrop" onclick="closeAiTryon()"></div>
+  <div class="ai-modal-box">
+    <!-- Header -->
+    <div class="ai-modal-header">
+      <div class="ai-modal-title-wrap">
+        <span class="ai-modal-icon">✨</span>
+        <div>
+          <h2 class="ai-modal-title">Baby AI Try-On</h2>
+          <p class="ai-modal-subtitle" id="ai-product-name">Upload your baby's photo to see the look!</p>
+        </div>
+      </div>
+      <button onclick="closeAiTryon()" class="ai-modal-close" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="ai-modal-body">
+      <!-- Upload Zone -->
+      <div id="ai-upload-zone" class="ai-upload-zone" onclick="document.getElementById('ai-baby-photo').click()">
+        <div class="ai-upload-icon">📷</div>
+        <p class="ai-upload-title">Upload Baby Photo</p>
+        <p class="ai-upload-hint">Click or drag & drop · JPG, PNG (max 5MB)</p>
+        <input type="file" id="ai-baby-photo" accept="image/*" style="display:none;" onchange="handleBabyPhotoUpload(event)">
+      </div>
+
+      <!-- Preview Row (shown after upload) -->
+      <div id="ai-preview-row" class="ai-preview-row" style="display:none;">
+        <div class="ai-preview-card">
+          <div class="ai-preview-label">👶 Your Baby</div>
+          <img id="ai-baby-preview" class="ai-preview-img" alt="Baby photo preview">
+        </div>
+        <div class="ai-preview-arrow">→</div>
+        <div class="ai-preview-card">
+          <div class="ai-preview-label">👗 Outfit</div>
+          <img id="ai-product-preview" class="ai-preview-img" alt="Product preview">
+        </div>
+      </div>
+
+      <!-- Generate Button -->
+      <button id="ai-generate-btn" class="btn btn-ai btn-full" onclick="generateAiTryon()" style="display:none; margin-top:20px;">
+        ✨ Generate AI Look
+      </button>
+
+      <!-- Loading State -->
+      <div id="ai-loading" class="ai-loading" style="display:none;">
+        <div class="ai-spinner"></div>
+        <p class="ai-loading-text">Our AI is styling your baby…</p>
+        <p class="ai-loading-sub">This usually takes 5–15 seconds</p>
+      </div>
+
+      <!-- Result -->
+      <div id="ai-result" class="ai-result" style="display:none;">
+        <div class="ai-result-label">✨ AI Generated Look</div>
+        <img id="ai-result-img" class="ai-result-img" alt="AI generated baby try-on result">
+        <div class="ai-result-actions">
+          <a id="ai-download-btn" href="#" download="little-bliss-tryon.png" class="btn btn-primary btn-sm">
+            ⬇️ Download
+          </a>
+          <button onclick="resetAiTryon()" class="btn btn-secondary btn-sm">🔄 Try Another</button>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="ai-error" class="ai-error" style="display:none;">
+        <div class="ai-error-icon">😕</div>
+        <p id="ai-error-msg" class="ai-error-text">Something went wrong. Please try again.</p>
+        <button onclick="resetAiTryon()" class="btn btn-secondary btn-sm" style="margin-top:12px;">Try Again</button>
+      </div>
+
+      <!-- No API Key Warning -->
+      <div id="ai-no-key" class="ai-error" style="display:none;">
+        <div class="ai-error-icon">🔑</div>
+        <p class="ai-error-text">
+          The Gemini API key hasn't been configured yet.<br>
+          <small>Go to <strong>Shopify Admin → Themes → Customize → Theme Settings → AI Try-On</strong> and add your Google Gemini API key.</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer notice -->
+    <div class="ai-modal-footer">
+      <p>Powered by <strong>Google Gemini AI</strong> · Your photos are not stored · For fun preview only</p>
+    </div>
+  </div>
+</div>

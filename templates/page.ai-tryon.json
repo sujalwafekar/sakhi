@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "ai-tryon": {
+            "type": "ai-tryon-tool",
+            "settings": {}
+        }
+    },
+    "order": [
+        "ai-tryon"
+    ]
+}

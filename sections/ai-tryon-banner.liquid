@@ -1,0 +1,67 @@
+{% if settings.ai_tryon_enabled %}
+<section class="ai-banner" id="ai-tryon-banner">
+  <div class="ai-banner-inner">
+    <div class="ai-banner-text">
+      <div class="ai-banner-eyebrow">
+        ✦ AI-Powered Feature
+      </div>
+      <h2 class="ai-banner-title">
+        See Your Baby in the<br>
+        <span>Perfect Outfit</span> — Before You Buy
+      </h2>
+      <p class="ai-banner-desc">
+        {{ section.settings.description }}
+      </p>
+      <ul class="ai-feature-list">
+        <li>Upload any photo of your baby</li>
+        <li>Our AI instantly generates a fun preview</li>
+        <li>No app needed — works right here</li>
+        <li>Try unlimited outfits, completely free</li>
+      </ul>
+      <a href="/pages/ai-try-on" class="btn btn-ai">
+        ✨ Try It Now — It's Free
+      </a>
+    </div>
+
+    <div class="ai-banner-visual">
+      <div class="ai-mockup">
+        <span class="ai-mockup-emoji">👶</span>
+        <div class="ai-step">
+          <div class="ai-step-num">1</div>
+          <div class="ai-step-text">Upload your baby's photo</div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-step-num">2</div>
+          <div class="ai-step-text">Pick any outfit from our store</div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-step-num">3</div>
+          <div class="ai-step-text">AI shows the look in seconds ✨</div>
+        </div>
+        <div style="margin-top:20px; padding:12px; background:rgba(168,85,247,0.15); border-radius:8px; border:1px solid rgba(168,85,247,0.3);">
+          <p style="color:#c084fc; font-size:0.8rem; font-weight:600;">Powered by Google Gemini AI</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "AI Try-On Banner",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our magical AI Try-On feature lets you see exactly how any outfit will look on your little one. Just upload their photo and pick a product — our AI does the rest!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Try-On Banner"
+    }
+  ]
+}
+{% endschema %}
