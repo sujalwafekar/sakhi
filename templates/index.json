@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "sakhi_hero": {
@@ -21,6 +12,45 @@
         "button_2_link": "shopify://pages/custom-dress",
         "padding-block-start": 0,
         "padding-block-end": 0
+      }
+    },
+    "sakhi_category_strip": {
+      "type": "sakhi-category-strip",
+      "blocks": {
+        "cat1": {
+          "type": "category",
+          "settings": {
+            "title": "Frocks"
+          }
+        },
+        "cat2": {
+          "type": "category",
+          "settings": {
+            "title": "Party Wear"
+          }
+        },
+        "cat3": {
+          "type": "category",
+          "settings": {
+            "title": "Custom Dresses"
+          }
+        },
+        "cat4": {
+          "type": "category",
+          "settings": {
+            "title": "New Arrivals"
+          }
+        }
+      },
+      "block_order": [
+        "cat1",
+        "cat2",
+        "cat3",
+        "cat4"
+      ],
+      "settings": {
+        "padding-block-start": 32,
+        "padding-block-end": 32
       }
     },
     "sakhi_trust_bar": {
@@ -377,7 +407,7 @@
   },
   "order": [
     "sakhi_hero",
-    "sakhi_trust_bar",
+    "sakhi_category_strip",
     "sakhi_featured_dresses",
     "sakhi_custom_promo",
     "sakhi_why_choose",

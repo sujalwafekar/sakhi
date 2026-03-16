@@ -7,6 +7,10 @@
 
 <div class="sakhi-split-hero-wrapper color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   
+  {% if section.settings.watermark_text != blank %}
+    <div class="sakhi-split-hero__watermark">{{ section.settings.watermark_text }}</div>
+  {% endif %}
+
   <div class="sakhi-split-hero page-width">
     
     {% comment %} Text Side (Left) {% endcomment %}
@@ -22,6 +26,15 @@
       <p class="sakhi-split-hero__subheading">
         {{ section.settings.subheading | default: 'Soft, beautiful frocks crafted with love and comfort.' }}
       </p>
+
+      {% if section.settings.show_trust_badges %}
+        <div class="sakhi-split-hero__trust-badges">
+          <span class="sakhi-hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Soft & Safe Fabric</span>
+          <span class="sakhi-hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Handmade</span>
+          <span class="sakhi-hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Made After Order</span>
+          <span class="sakhi-hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 3–5 Day Prod.</span>
+        </div>
+      {% endif %}
 
       <div class="sakhi-split-hero__buttons">
         {% if section.settings.button_1_label != blank %}
@@ -85,6 +98,54 @@
     flex: 1 1 400px;
     padding-right: 20px;
     animation: sakhi-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .sakhi-split-hero__watermark {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(120px, 15vw, 240px);
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-weight: 800;
+    color: var(--sakhi-watermark-color, rgba(193, 122, 142, 0.05));
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Trust Badges */
+  .sakhi-split-hero__trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .sakhi-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    box-shadow: 0 4px 12px rgba(44, 34, 32, 0.03);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .sakhi-hero-badge svg {
+    width: 14px;
+    height: 14px;
+    color: var(--sakhi-gold, #D4A853);
   }
 
   .sakhi-split-hero__image-area {
@@ -161,9 +222,10 @@
   }
 
   .sakhi-split-hero__btn--secondary {
-    background: transparent !important;
+    background: #FFFFFF !important;
     color: var(--sakhi-blush, #C17A8E) !important;
-    border: 2px solid var(--sakhi-blush, #C17A8E) !important;
+    border: 2px solid var(--sakhi-border, #F0E4DC) !important;
+    box-shadow: 0 4px 16px rgba(44, 34, 32, 0.05) !important;
   }
 
   .sakhi-split-hero__btn--secondary:hover {
@@ -298,6 +360,18 @@
       "id": "eyebrow",
       "label": "Eyebrow text",
       "default": "✨ Handcrafted with Love"
+    },
+    {
+      "type": "text",
+      "id": "watermark_text",
+      "label": "Background Watermark Text",
+      "default": "sakhi"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show Trust Badges",
+      "default": true
     },
     {
       "type": "text",
