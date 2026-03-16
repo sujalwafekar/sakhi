@@ -96,27 +96,7 @@
 
             container.appendChild(particle);
         }
-    }
 
-    // ── Sparkle cursor trail ────────────────────────────────────
-    function initCursorSparkle() {
-        let throttle = false;
-        document.addEventListener('mousemove', (e) => {
-            if (throttle) return;
-            throttle = true;
-            setTimeout(() => { throttle = false; }, 80);
-
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sakhi-sparkle';
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            document.body.appendChild(sparkle);
-
-            setTimeout(() => sparkle.remove(), 800);
-        });
-    }
-
-    // ── Add to Cart Animation ───────────────────────────────────
     function initAddToCartAnimation() {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest(
@@ -329,7 +309,7 @@
         initPriceCountUp();
 
         // Delayed inits
-        setTimeout(initCursorSparkle, 2000);
+        // setTimeout(initCursorSparkle, 2000);
 
         // Re-initialize on Shopify section render (theme editor)
         document.addEventListener('shopify:section:load', () => {
