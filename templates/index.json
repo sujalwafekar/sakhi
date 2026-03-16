@@ -23,6 +23,53 @@
         "padding-block-end": 0
       }
     },
+    "sakhi_trust_bar": {
+      "type": "sakhi-trust-bar",
+      "blocks": {
+        "block1": {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "fabric",
+            "title": "Soft & Safe Fabrics",
+            "text": "100% gentle on skin"
+          }
+        },
+        "block2": {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "heart",
+            "title": "Handmade with Care",
+            "text": "Crafted with love"
+          }
+        },
+        "block3": {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "scissors",
+            "title": "Made After Order",
+            "text": "Perfect custom fit"
+          }
+        },
+        "block4": {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Delivery",
+            "text": "Dispatched in 3-5 days"
+          }
+        }
+      },
+      "block_order": [
+        "block1",
+        "block2",
+        "block3",
+        "block4"
+      ],
+      "settings": {
+        "padding-block-start": 36,
+        "padding-block-end": 36
+      }
+    },
     "sakhi_featured_dresses": {
       "type": "sakhi-featured-dresses",
       "settings": {
@@ -330,9 +377,10 @@
   },
   "order": [
     "sakhi_hero",
+    "sakhi_trust_bar",
     "sakhi_featured_dresses",
-    "sakhi_why_choose",
     "sakhi_custom_promo",
+    "sakhi_why_choose",
     "sakhi_ai_coming",
     "sakhi_handmade_story",
     "sakhi_size_guide",

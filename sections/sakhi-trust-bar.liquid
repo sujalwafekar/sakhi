@@ -1,0 +1,226 @@
+{% comment %}
+  Sakhi – Trust Bar
+  A horizontal 4-column trust indicator bar (e.g., Soft Fabrics, Handmade, Delivery, Made to Order).
+{% endcomment %}
+
+<div class="sakhi-trust-bar section-wrapper spacing-style color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="page-width">
+    <div class="sakhi-trust-bar__grid">
+      {% for block in section.blocks %}
+        <div class="sakhi-trust-bar__item" {{ block.shopify_attributes }}>
+          <div class="sakhi-trust-bar__icon-wrapper">
+            {% if block.settings.custom_svg != blank %}
+              {{ block.settings.custom_svg }}
+            {% else %}
+              {% case block.settings.icon %}
+                {% when 'fabric' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z" stroke-dasharray="2 4"/></svg>
+                {% when 'heart' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {% when 'scissors' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+                {% when 'truck' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                {% else %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {% endcase %}
+            {% endif %}
+          </div>
+          <h4 class="sakhi-trust-bar__title">{{ block.settings.title }}</h4>
+          {% if block.settings.text != blank %}
+            <p class="sakhi-trust-bar__text">{{ block.settings.text }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-trust-bar {
+    background: var(--sakhi-cream, #FFF8F3);
+    border-top: 1px solid var(--sakhi-border, #F0E4DC);
+    border-bottom: 1px solid var(--sakhi-border, #F0E4DC);
+    padding: 24px 0;
+  }
+
+  .sakhi-trust-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .sakhi-trust-bar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sakhi-trust-bar__icon-wrapper {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--sakhi-blush-light, #FFF0F3);
+    color: var(--sakhi-blush, #C17A8E);
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(193, 122, 142, 0.15);
+  }
+
+  .sakhi-trust-bar__icon-wrapper svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sakhi-trust-bar__title {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--sakhi-warm-dark, #2C2220) !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .sakhi-trust-bar__text {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sakhi-trust-bar__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .sakhi-trust-bar {
+      padding: 40px 0;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sakhi Trust Bar",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_icon",
+      "name": "Trust Indicator",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "fabric", "label": "Fabric/Soft" },
+            { "value": "heart", "label": "Heart/Love" },
+            { "value": "scissors", "label": "Scissors/Tailor" },
+            { "value": "truck", "label": "Truck/Delivery" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "heart"
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Custom SVG (Overrides dropdown)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Handmade with Care"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "Crafted beautifully for your child."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sakhi Trust Bar",
+      "blocks": [
+        {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "fabric",
+            "title": "Soft & Safe Fabrics",
+            "text": "100% gentle on skin"
+          }
+        },
+        {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "heart",
+            "title": "Handmade with Care",
+            "text": "Crafted with love"
+          }
+        },
+        {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "scissors",
+            "title": "Made After Order",
+            "text": "Perfect custom fit"
+          }
+        },
+        {
+          "type": "trust_icon",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Delivery",
+            "text": "Dispatched in 3-5 days"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

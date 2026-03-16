@@ -37,9 +37,12 @@
               {% if product.compare_at_price > product.price %}
                 <span class="sakhi-featured__badge">Sale</span>
               {% endif %}
-              <button class="sakhi-featured__quick-view" aria-label="Quick view {{ product.title }}">
-                Quick View
-              </button>
+              {% form 'product', product, class: 'sakhi-featured__quick-add-form' %}
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit" class="sakhi-featured__quick-view" aria-label="Add {{ product.title }} to cart" {% if product.available == false %}disabled{% endif %}>
+                  {% if product.available %}Quick Add{% else %}Sold Out{% endif %}
+                </button>
+              {% endform %}
             </div>
             <div class="sakhi-featured__info">
               <h3 class="sakhi-featured__product-title">{{ product.title }}</h3>
@@ -174,6 +177,11 @@
     padding: 4px 14px;
     border-radius: 100px;
     text-transform: uppercase;
+  }
+
+  .sakhi-featured__quick-add-form {
+    margin: 0;
+    padding: 0;
   }
 
   .sakhi-featured__quick-view {

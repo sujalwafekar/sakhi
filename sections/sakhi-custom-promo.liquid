@@ -9,7 +9,17 @@
   style="{% render 'spacing-style', settings: section.settings %}"
 >
   <div class="sakhi-custom-promo__inner">
-    <div class="sakhi-custom-promo__text">
+    {% if section.settings.image != blank %}
+      <div class="sakhi-custom-promo__image-wrapper">
+        {{ section.settings.image | image_url: width: 800 | image_tag: class: 'sakhi-custom-promo__img', loading: 'lazy' }}
+      </div>
+    {% else %}
+      <div class="sakhi-custom-promo__image-wrapper sakhi-custom-promo__image-wrapper--placeholder">
+        {{ 'collection-1' | placeholder_svg_tag: 'sakhi-custom-promo__img placeholder-svg' }}
+      </div>
+    {% endif %}
+
+    <div class="sakhi-custom-promo__content">
       {% if section.settings.eyebrow != blank %}
         <p class="sakhi-custom-promo__eyebrow">{{ section.settings.eyebrow }}</p>
       {% endif %}
@@ -20,24 +30,28 @@
         {{ section.settings.description | default: 'Create a one-of-a-kind dress your little one will love. Pick colors, sleeves, and even add their name.' }}
       </p>
 
-      {% if section.settings.cta_label != blank %}
-        <a href="{{ section.settings.cta_link }}" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-custom-promo__cta">
-          {{ section.settings.cta_label }}
-        </a>
-      {% endif %}
-    </div>
+      <div class="sakhi-custom-promo__steps">
+        {% for block in section.blocks %}
+          <div class="sakhi-custom-promo__step" {{ block.shopify_attributes }}>
+            <div class="sakhi-custom-promo__step-num">{{ forloop.index }}</div>
+            <div class="sakhi-custom-promo__step-icon">{{ block.settings.icon | default: '🎨' }}</div>
+            <div class="sakhi-custom-promo__step-text">
+              <h3 class="sakhi-custom-promo__step-title">{{ block.settings.title }}</h3>
+              {% if block.settings.description != blank %}
+                <p class="sakhi-custom-promo__step-desc">{{ block.settings.description }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
 
-    <div class="sakhi-custom-promo__steps">
-      {% for block in section.blocks %}
-        <div class="sakhi-custom-promo__step" {{ block.shopify_attributes }}>
-          <div class="sakhi-custom-promo__step-num">{{ forloop.index }}</div>
-          <div class="sakhi-custom-promo__step-icon">{{ block.settings.icon | default: '🎨' }}</div>
-          <h3 class="sakhi-custom-promo__step-title">{{ block.settings.title }}</h3>
-          {% if block.settings.description != blank %}
-            <p class="sakhi-custom-promo__step-desc">{{ block.settings.description }}</p>
-          {% endif %}
+      {% if section.settings.cta_label != blank %}
+        <div class="sakhi-custom-promo__cta-wrapper">
+          <a href="{{ section.settings.cta_link }}" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-custom-promo__cta">
+            {{ section.settings.cta_label }}
+          </a>
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 </div>
@@ -50,23 +64,56 @@
   .sakhi-custom-promo__inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 48px;
+    gap: 40px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(44, 34, 32, 0.06);
   }
 
-  @media screen and (min-width: 990px) {
+  @media screen and (min-width: 900px) {
     .sakhi-custom-promo__inner {
       flex-direction: row;
-      text-align: left;
-      gap: 60px;
-      align-items: center;
+      gap: 0;
     }
-    .sakhi-custom-promo__text {
-      flex: 1;
-    }
-    .sakhi-custom-promo__steps {
-      flex: 1;
+  }
+
+  .sakhi-custom-promo__image-wrapper {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .sakhi-custom-promo__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sakhi-custom-promo__image-wrapper--placeholder {
+    background: var(--sakhi-blush-light, #FFF0F3);
+  }
+
+  .sakhi-custom-promo__image-wrapper--placeholder svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--sakhi-blush, #C17A8E);
+    opacity: 0.2;
+  }
+
+  .sakhi-custom-promo__content {
+    flex: 1.2;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 900px) {
+    .sakhi-custom-promo__content {
+      padding: 60px 48px;
     }
   }
 
@@ -77,16 +124,17 @@
     text-transform: uppercase;
     color: var(--sakhi-blush, #C17A8E);
     margin-bottom: 12px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .sakhi-custom-promo__title {
     font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
-    font-size: 36px;
+    font-size: clamp(32px, 4vw, 44px);
     font-weight: 700;
     color: var(--sakhi-warm-dark, #2C2220);
     margin-bottom: 16px;
-    line-height: 1.2;
+    margin-top: 0;
+    line-height: 1.1;
   }
 
   .sakhi-custom-promo__desc {
@@ -94,75 +142,100 @@
     font-size: 16px;
     line-height: 1.7;
     color: var(--sakhi-warm-gray, #4A3F3A);
-    margin-bottom: 28px;
-    max-width: 420px;
-  }
-
-  .sakhi-custom-promo__cta {
-    display: inline-block;
+    margin-bottom: 40px;
+    max-width: 500px;
   }
 
   .sakhi-custom-promo__steps {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 400px;
+    gap: 16px;
+    margin-bottom: 40px;
   }
 
   .sakhi-custom-promo__step {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
-    padding: 20px 24px;
-    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    background: var(--sakhi-blush-light, #FFF0F3);
     border-radius: 16px;
-    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border: 1px solid transparent;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: left;
   }
 
   .sakhi-custom-promo__step:hover {
-    transform: translateX(6px);
-    box-shadow: 0 8px 30px rgba(193, 122, 142, 0.12);
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(193, 122, 142, 0.15);
+    background: #FFFFFF;
     border-color: var(--sakhi-blush, #C17A8E);
   }
 
   .sakhi-custom-promo__step-num {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: var(--sakhi-blush, #C17A8E);
     color: #FFFFFF;
     font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-top: 2px;
   }
 
   .sakhi-custom-promo__step-icon {
-    font-size: 28px;
+    font-size: 24px;
     flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  .sakhi-custom-promo__step-text {
+    flex: 1;
   }
 
   .sakhi-custom-promo__step-title {
     font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--sakhi-warm-dark, #2C2220);
-    margin: 0;
-    flex: 1;
+    margin: 0 0 6px 0;
   }
 
   .sakhi-custom-promo__step-desc {
     font-family: var(--sakhi-font-body, 'Lora', serif);
-    font-size: 13px;
+    font-size: 14px;
     color: var(--sakhi-warm-gray, #4A3F3A);
-    margin: 4px 0 0;
+    margin: 0;
     line-height: 1.5;
+  }
+
+  .sakhi-custom-promo__cta-wrapper {
+    margin-top: 10px;
+  }
+
+  .sakhi-custom-promo__cta {
+    display: inline-block !important;
+    padding: 16px 40px !important;
+    border-radius: 100px !important;
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    background: var(--sakhi-warm-dark, #2C2220) !important;
+    color: #FFFFFF !important;
+    border: 2px solid var(--sakhi-warm-dark, #2C2220) !important;
+    transition: all 0.4s ease !important;
+  }
+
+  .sakhi-custom-promo__cta:hover {
+    background: var(--sakhi-blush, #C17A8E) !important;
+    border-color: var(--sakhi-blush, #C17A8E) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(193, 122, 142, 0.3) !important;
   }
 
   @media screen and (max-width: 749px) {
@@ -184,6 +257,11 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Promotion Image (Left Side)"
+    },
     {
       "type": "text",
       "id": "eyebrow",

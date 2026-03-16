@@ -1,237 +1,287 @@
 {% comment %}
-  Sakhi – Hero Banner Section
-  Full-width hero with headline, subheadline, two CTA buttons, floating animation
+  Sakhi – Premium Split Hero Banner
+  Left: Text & calls to action
+  Right: Large high-quality featured image
+  Floating playful elements added for emotional connection.
 {% endcomment %}
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<div
-  class="section section--full-width color-{{ section.settings.color_scheme }} spacing-style sakhi-hero-section"
-  style="{% render 'spacing-style', settings: section.settings %}"
->
-  {% if section.settings.background_image != blank %}
-    <div class="sakhi-hero__bg">
-      {{ section.settings.background_image | image_url: width: 1920 | image_tag: alt: section.settings.heading, class: 'sakhi-hero__bg-img', loading: 'eager' }}
-    </div>
-  {% endif %}
-
-  <div class="sakhi-hero__overlay"></div>
-
-  <div class="sakhi-hero__content">
-    {% if section.settings.eyebrow != blank %}
-      <p class="sakhi-hero__eyebrow">{{ section.settings.eyebrow }}</p>
-    {% endif %}
-
-    <h1 class="sakhi-hero__heading">
-      {{ section.settings.heading | default: 'Handmade Dresses for Your Little One' }}
-    </h1>
-
-    <p class="sakhi-hero__subheading">
-      {{ section.settings.subheading | default: 'Beautiful frocks crafted with love and comfort.' }}
-    </p>
-
-    <div class="sakhi-hero__buttons">
-      {% if section.settings.button_1_label != blank %}
-        <a href="{{ section.settings.button_1_link }}" class="sakhi-hero__btn sakhi-hero__btn--primary">
-          {{ section.settings.button_1_label }}
-        </a>
+<div class="sakhi-split-hero-wrapper color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+  
+  <div class="sakhi-split-hero page-width">
+    
+    {% comment %} Text Side (Left) {% endcomment %}
+    <div class="sakhi-split-hero__text-area">
+      {% if section.settings.eyebrow != blank %}
+        <p class="sakhi-split-hero__eyebrow">{{ section.settings.eyebrow }}</p>
       {% endif %}
-      {% if section.settings.button_2_label != blank %}
-        <a href="{{ section.settings.button_2_link }}" class="sakhi-hero__btn sakhi-hero__btn--secondary">
-          {{ section.settings.button_2_label }}
-        </a>
-      {% endif %}
+
+      <h1 class="sakhi-split-hero__heading">
+        {{ section.settings.heading | default: 'Handmade Dresses for Your Little One' }}
+      </h1>
+
+      <p class="sakhi-split-hero__subheading">
+        {{ section.settings.subheading | default: 'Soft, beautiful frocks crafted with love and comfort.' }}
+      </p>
+
+      <div class="sakhi-split-hero__buttons">
+        {% if section.settings.button_1_label != blank %}
+          <a href="{{ section.settings.button_1_link }}" class="sakhi-split-hero__btn sakhi-split-hero__btn--primary">
+            {{ section.settings.button_1_label }}
+          </a>
+        {% endif %}
+        {% if section.settings.button_2_label != blank %}
+          <a href="{{ section.settings.button_2_link }}" class="sakhi-split-hero__btn sakhi-split-hero__btn--secondary">
+            {{ section.settings.button_2_label }}
+          </a>
+        {% endif %}
+      </div>
     </div>
 
-    <div class="sakhi-hero__floating-elements">
-      <span class="sakhi-hero__float sakhi-hero__float--1">🌸</span>
-      <span class="sakhi-hero__float sakhi-hero__float--2">✨</span>
-      <span class="sakhi-hero__float sakhi-hero__float--3">🎀</span>
-      <span class="sakhi-hero__float sakhi-hero__float--4">💖</span>
+    {% comment %} Image Side (Right) {% endcomment %}
+    <div class="sakhi-split-hero__image-area">
+      <div class="sakhi-split-hero__image-wrapper">
+        {% if section.settings.background_image != blank %}
+          {{ section.settings.background_image | image_url: width: 1000 | image_tag: 
+            class: 'sakhi-split-hero__img',
+            loading: 'eager',
+            alt: section.settings.heading 
+          }}
+        {% else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'sakhi-split-hero__img placeholder-svg' }}
+        {% endif %}
+      </div>
+      
+      {% comment %} Floating play elements around the image {% endcomment %}
+      <div class="sakhi-split-hero__decorations">
+        <span class="sakhi-float-decor sakhi-float-decor--1">🎀</span>
+        <span class="sakhi-float-decor sakhi-float-decor--2">✨</span>
+        <span class="sakhi-float-decor sakhi-float-decor--3">💖</span>
+        <span class="sakhi-float-decor sakhi-float-decor--4">🌸</span>
+      </div>
     </div>
+
   </div>
 </div>
 
 {% stylesheet %}
-  .sakhi-hero-section {
+  .sakhi-split-hero-wrapper {
     position: relative;
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-    text-align: center;
-    background: linear-gradient(135deg, #FFF0F3 0%, #F5F0FF 50%, #E8F4FD 100%);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background: linear-gradient(135deg, #FFF0F3 0%, #FFF8F3 100%);
   }
 
-  .sakhi-hero__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .sakhi-hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .sakhi-hero__overlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 240, 243, 0.6) 0%,
-      rgba(245, 240, 255, 0.5) 50%,
-      rgba(255, 248, 243, 0.7) 100%
-    );
-    z-index: 1;
-  }
-
-  .sakhi-hero__content {
-    position: relative;
-    z-index: 99 !important;
-    max-width: 700px;
-    padding: 40px 20px;
-    animation: sakhi-hero-fade-in 1s ease both;
-  }
-
-  .sakhi-hero__eyebrow {
-    font-family: var(--sakhi-font-body, 'Lora', serif);
-    font-size: 13px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--sakhi-blush, #C17A8E);
-    margin-bottom: 16px;
-    font-weight: 600;
-  }
-
-  .sakhi-hero__heading {
-    font-family: var(--sakhi-font-heading, 'Playfair Display', serif) !important;
-    font-size: 48px !important;
-    font-weight: 700 !important;
-    color: var(--sakhi-warm-dark, #2C2220) !important;
-    line-height: 1.2 !important;
-    margin-bottom: 20px !important;
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8) !important;
-  }
-
-  .sakhi-hero__subheading {
-    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-    color: var(--sakhi-warm-gray, #4A3F3A) !important;
-    margin-bottom: 36px !important;
-    max-width: 520px !important;
-    margin-inline: auto !important;
-    text-shadow: 0 1px 5px rgba(255, 255, 255, 0.8) !important;
-  }
-
-  .sakhi-hero__buttons {
+  .sakhi-split-hero {
     display: flex;
-    gap: 16px;
-    justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .sakhi-hero__btn {
-    display: inline-block !important;
-    padding: 16px 36px !important;
-    border-radius: 28px !important;
-    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.06em !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    cursor: pointer !important;
-    position: relative !important;
-    z-index: 100 !important;
-  }
-
-  .sakhi-hero__btn--primary {
-    background: var(--sakhi-blush, #C17A8E);
-    color: #FFFFFF;
-    box-shadow: 0 4px 20px rgba(193, 122, 142, 0.3);
-  }
-
-  .sakhi-hero__btn--primary:hover {
-    background: var(--sakhi-blush-dark, #A8637A);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(193, 122, 142, 0.4);
-  }
-
-  .sakhi-hero__btn--secondary {
-    background: transparent;
-    color: var(--sakhi-warm-dark, #2C2220);
-    border: 2px solid var(--sakhi-blush, #C17A8E);
-  }
-
-  .sakhi-hero__btn--secondary:hover {
-    background: var(--sakhi-blush, #C17A8E);
-    color: #FFFFFF;
-    transform: translateY(-2px);
-  }
-
-  /* Floating elements */
-  .sakhi-hero__floating-elements {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+    align-items: center;
+    gap: 40px;
+    position: relative;
     z-index: 2;
   }
 
-  .sakhi-hero__float {
+  .sakhi-split-hero__text-area {
+    flex: 1 1 400px;
+    padding-right: 20px;
+    animation: sakhi-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .sakhi-split-hero__image-area {
+    flex: 1 1 500px;
+    position: relative;
+    perspective: 1000px;
+    animation: sakhi-fade-zoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Typography */
+  .sakhi-split-hero__eyebrow {
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sakhi-blush, #C17A8E);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .sakhi-split-hero__heading {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif) !important;
+    font-size: clamp(40px, 5vw, 64px) !important;
+    font-weight: 700 !important;
+    color: var(--sakhi-warm-dark, #2C2220) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 24px !important;
+    margin-top: 0 !important;
+  }
+
+  .sakhi-split-hero__subheading {
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-size: clamp(16px, 2vw, 20px) !important;
+    line-height: 1.6 !important;
+    color: var(--sakhi-warm-gray, #4A3F3A) !important;
+    margin-bottom: 40px !important;
+    max-width: 480px;
+  }
+
+  /* Buttons */
+  .sakhi-split-hero__buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .sakhi-split-hero__btn {
+    display: inline-block !important;
+    padding: 16px 40px !important;
+    border-radius: 100px !important; /* Fully rounded premium feel */
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    text-align: center;
+  }
+
+  .sakhi-split-hero__btn--primary {
+    background: var(--sakhi-blush, #C17A8E) !important;
+    color: #FFFFFF !important;
+    border: 2px solid var(--sakhi-blush, #C17A8E) !important;
+    box-shadow: 0 8px 24px rgba(193, 122, 142, 0.3) !important;
+  }
+
+  .sakhi-split-hero__btn--primary:hover {
+    background: var(--sakhi-blush-dark, #A8637A) !important;
+    border-color: var(--sakhi-blush-dark, #A8637A) !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(193, 122, 142, 0.4) !important;
+  }
+
+  .sakhi-split-hero__btn--secondary {
+    background: transparent !important;
+    color: var(--sakhi-blush, #C17A8E) !important;
+    border: 2px solid var(--sakhi-blush, #C17A8E) !important;
+  }
+
+  .sakhi-split-hero__btn--secondary:hover {
+    background: var(--sakhi-blush-light, #FFF0F3) !important;
+    color: var(--sakhi-blush-dark, #A8637A) !important;
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  /* Premium Image Wrapper */
+  .sakhi-split-hero__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(44, 34, 32, 0.08);
+    transform: rotate(-1.5deg); /* Subtle playful tilt */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #FFFFFF;
+    border: 8px solid #FFFFFF;
+  }
+
+  .sakhi-split-hero__image-wrapper:hover {
+    transform: rotate(0deg) translateY(-10px);
+  }
+
+  .sakhi-split-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 22px; /* Inner radius matching the border */
+    display: block;
+  }
+
+  .sakhi-split-hero__img.placeholder-svg {
+    background: var(--sakhi-gold-light, #F5E6C8);
+    fill: var(--sakhi-gold, #D4A853);
+    padding: 40px;
+  }
+
+  /* Floating Theme Elements */
+  .sakhi-split-hero__decorations {
     position: absolute;
-    font-size: 28px;
+    inset: -40px;
     pointer-events: none;
-    animation: sakhi-float 6s ease-in-out infinite;
-    opacity: 0.6;
+    z-index: 10;
   }
 
-  .sakhi-hero__float--1 { top: 15%; left: 8%; animation-delay: 0s; }
-  .sakhi-hero__float--2 { top: 20%; right: 12%; animation-delay: 1.5s; }
-  .sakhi-hero__float--3 { bottom: 25%; left: 15%; animation-delay: 3s; }
-  .sakhi-hero__float--4 { bottom: 20%; right: 10%; animation-delay: 4.5s; }
-
-  @keyframes sakhi-float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-15px) rotate(5deg); }
-    50% { transform: translateY(-8px) rotate(-3deg); }
-    75% { transform: translateY(-20px) rotate(3deg); }
+  .sakhi-float-decor {
+    position: absolute;
+    font-size: 36px;
+    animation: sakhi-wobble 4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
   }
 
-  @keyframes sakhi-hero-fade-in {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  .sakhi-float-decor--1 { top: 5%; left: -5%; animation-delay: 0s; font-size: 48px; }
+  .sakhi-float-decor--2 { top: 15%; right: -2%; animation-delay: -1.2s; font-size: 32px; }
+  .sakhi-float-decor--3 { bottom: 10%; left: -8%; animation-delay: -2s; font-size: 40px; }
+  .sakhi-float-decor--4 { bottom: -2%; right: 10%; animation-delay: -0.7s; font-size: 44px; }
+
+  /* Animations */
+  @keyframes sakhi-slide-up {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* Responsive */
+  @keyframes sakhi-fade-zoom {
+    0% { opacity: 0; transform: scale(0.95) translateZ(0); }
+    100% { opacity: 1; transform: scale(1) translateZ(0); }
+  }
+
+  @keyframes sakhi-wobble {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    100% { transform: translateY(-15px) rotate(10deg) scale(1.1); }
+  }
+
+  /* Responsive Adjustments */
+  @media screen and (max-width: 989px) {
+    .sakhi-split-hero {
+      gap: 30px;
+      text-align: center;
+    }
+    .sakhi-split-hero__text-area {
+      padding-right: 0;
+    }
+    .sakhi-split-hero__subheading {
+      margin-inline: auto;
+    }
+    .sakhi-split-hero__buttons {
+      justify-content: center;
+    }
+    .sakhi-split-hero__image-wrapper {
+      max-width: 80%;
+      margin: 0 auto;
+      aspect-ratio: 1 / 1;
+      transform: rotate(0);
+    }
+    .sakhi-float-decor { display: none; } /* Hide floats on mobile to reduce clutter */
+  }
+
   @media screen and (max-width: 749px) {
-    .sakhi-hero-section {
-      min-height: 70vh;
+    .sakhi-split-hero-wrapper {
+      padding-top: 30px;
+      padding-bottom: 40px;
     }
-    .sakhi-hero__heading {
-      font-size: 32px;
+    .sakhi-split-hero__image-wrapper {
+      max-width: 100%;
+      border-width: 4px;
     }
-    .sakhi-hero__subheading {
-      font-size: 16px;
-    }
-    .sakhi-hero__btn {
-      padding: 14px 28px;
-      font-size: 13px;
-    }
-    .sakhi-hero__float {
-      font-size: 20px;
+    .sakhi-split-hero__btn {
+      width: 100%; /* Full width buttons on mobile */
     }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Sakhi Hero Banner",
+  "name": "Sakhi Premium Hero",
   "tag": "section",
   "class": "section-wrapper",
   "disabled_on": {
@@ -241,7 +291,7 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background image"
+      "label": "Featured image (Right Side)"
     },
     {
       "type": "text",
@@ -259,29 +309,29 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Beautiful frocks crafted with love and comfort. Soft fabrics, unique designs, made just for your child."
+      "default": "Soft, beautiful frocks crafted with love and comfort."
     },
     {
       "type": "text",
       "id": "button_1_label",
-      "label": "Button 1 label",
+      "label": "Primary Button label",
       "default": "Shop Dresses"
     },
     {
       "type": "url",
       "id": "button_1_link",
-      "label": "Button 1 link"
+      "label": "Primary Button link"
     },
     {
       "type": "text",
       "id": "button_2_label",
-      "label": "Button 2 label",
+      "label": "Secondary Button label",
       "default": "Customize a Dress"
     },
     {
       "type": "url",
       "id": "button_2_link",
-      "label": "Button 2 link"
+      "label": "Secondary Button link"
     },
     {
       "type": "color_scheme",
@@ -316,7 +366,7 @@
   ],
   "presets": [
     {
-      "name": "Sakhi Hero Banner"
+      "name": "Sakhi Premium Hero"
     }
   ]
 }
