@@ -91,7 +91,7 @@
 
   .sakhi-hero__content {
     position: relative;
-    z-index: 10;
+    z-index: 99 !important;
     max-width: 700px;
     padding: 40px 20px;
     animation: sakhi-hero-fade-in 1s ease both;
@@ -108,22 +108,24 @@
   }
 
   .sakhi-hero__heading {
-    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--sakhi-warm-dark, #2C2220);
-    line-height: 1.2;
-    margin-bottom: 20px;
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif) !important;
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    color: var(--sakhi-warm-dark, #2C2220) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 20px !important;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8) !important;
   }
 
   .sakhi-hero__subheading {
-    font-family: var(--sakhi-font-body, 'Lora', serif);
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--sakhi-warm-gray, #4A3F3A);
-    margin-bottom: 36px;
-    max-width: 520px;
-    margin-inline: auto;
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    color: var(--sakhi-warm-gray, #4A3F3A) !important;
+    margin-bottom: 36px !important;
+    max-width: 520px !important;
+    margin-inline: auto !important;
+    text-shadow: 0 1px 5px rgba(255, 255, 255, 0.8) !important;
   }
 
   .sakhi-hero__buttons {
@@ -134,17 +136,19 @@
   }
 
   .sakhi-hero__btn {
-    display: inline-block;
-    padding: 16px 36px;
-    border-radius: 28px;
-    font-family: var(--sakhi-font-body, 'Lora', serif);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    display: inline-block !important;
+    padding: 16px 36px !important;
+    border-radius: 28px !important;
+    font-family: var(--sakhi-font-body, 'Lora', serif) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 100 !important;
   }
 
   .sakhi-hero__btn--primary {
