@@ -1,0 +1,341 @@
+{% comment %}
+  Sakhi – Featured Dresses Section
+  Displays products from a selected collection with product image, title, price, quick view
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-featured__header">
+    <h2 class="sakhi-featured__title">
+      {{ section.settings.heading | default: 'Our Beautiful Dresses' }}
+    </h2>
+    {% if section.settings.subheading != blank %}
+      <p class="sakhi-featured__subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+    <div class="sakhi-featured__accent"></div>
+  </div>
+
+  {%- assign collection = collections[section.settings.collection] -%}
+  {%- assign limit = section.settings.products_to_show -%}
+
+  {% if collection != blank and collection.products.size > 0 %}
+    <div class="sakhi-featured__grid">
+      {% for product in collection.products limit: limit %}
+        <div class="sakhi-featured__card">
+          <a href="{{ product.url }}" class="sakhi-featured__card-link">
+            <div class="sakhi-featured__image-wrap">
+              {% if product.featured_image != blank %}
+                {{ product.featured_image | image_url: width: 480 | image_tag: alt: product.title, class: 'sakhi-featured__img', loading: 'lazy' }}
+              {% else %}
+                <div class="sakhi-featured__placeholder">
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+              {% if product.compare_at_price > product.price %}
+                <span class="sakhi-featured__badge">Sale</span>
+              {% endif %}
+              <button class="sakhi-featured__quick-view" aria-label="Quick view {{ product.title }}">
+                Quick View
+              </button>
+            </div>
+            <div class="sakhi-featured__info">
+              <h3 class="sakhi-featured__product-title">{{ product.title }}</h3>
+              <div class="sakhi-featured__price">
+                <span class="sakhi-featured__price-current">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="sakhi-featured__price-compare">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <div class="sakhi-featured__view-all">
+        <a href="{{ collection.url }}" class="sakhi-hero__btn sakhi-hero__btn--primary">
+          {{ section.settings.view_all_text | default: 'View All Dresses' }}
+        </a>
+      </div>
+    {% endif %}
+  {% else %}
+    <p style="text-align: center; color: var(--sakhi-warm-gray); font-style: italic;">
+      Select a collection in the theme editor to display products here.
+    </p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .sakhi-featured__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .sakhi-featured__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 12px;
+  }
+
+  .sakhi-featured__subtitle {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .sakhi-featured__accent {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sakhi-blush, #C17A8E), var(--sakhi-gold, #D4A853));
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+
+  .sakhi-featured__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sakhi-featured__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      padding: 0;
+    }
+  }
+
+  .sakhi-featured__card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sakhi-featured__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(44, 34, 32, 0.1);
+    border-color: var(--sakhi-blush, #C17A8E);
+  }
+
+  .sakhi-featured__card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .sakhi-featured__image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--sakhi-blush-light, #FFF0F3);
+  }
+
+  .sakhi-featured__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sakhi-featured__card:hover .sakhi-featured__img {
+    transform: scale(1.06);
+  }
+
+  .sakhi-featured__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFF0F3, #F5F0FF);
+  }
+
+  .sakhi-featured__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--sakhi-blush, #C17A8E);
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 14px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  .sakhi-featured__quick-view {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--sakhi-warm-dark, #2C2220);
+    border: 1px solid var(--sakhi-blush, #C17A8E);
+    border-radius: 28px;
+    padding: 10px 24px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+  }
+
+  .sakhi-featured__card:hover .sakhi-featured__quick-view {
+    bottom: 16px;
+  }
+
+  .sakhi-featured__quick-view:hover {
+    background: var(--sakhi-blush, #C17A8E);
+    color: #FFFFFF;
+  }
+
+  .sakhi-featured__info {
+    padding: 16px;
+  }
+
+  .sakhi-featured__product-title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .sakhi-featured__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sakhi-featured__price-current {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sakhi-blush-dark, #A8637A);
+  }
+
+  .sakhi-featured__price-compare {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .sakhi-featured__view-all {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-featured__title {
+      font-size: 28px;
+    }
+    .sakhi-featured__quick-view {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sakhi Featured Dresses",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Beautiful Dresses"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Handmade with love for your little one"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all button text",
+      "default": "View All Dresses"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sakhi Featured Dresses"
+    }
+  ]
+}
+{% endschema %}

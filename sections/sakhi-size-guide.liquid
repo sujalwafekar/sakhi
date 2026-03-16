@@ -1,0 +1,335 @@
+{% comment %}
+  Sakhi – Size Guide Section
+  Simple editable size guide table for children aged 0–8
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-size__header">
+    <h2 class="sakhi-size__title">
+      {{ section.settings.heading | default: 'Size Guide' }}
+    </h2>
+    {% if section.settings.subheading != blank %}
+      <p class="sakhi-size__subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+    <div class="sakhi-size__accent"></div>
+  </div>
+
+  <div class="sakhi-size__table-wrap">
+    <table class="sakhi-size__table">
+      <thead>
+        <tr>
+          <th>{{ section.settings.col_age | default: 'Age Group' }}</th>
+          <th>{{ section.settings.col_height | default: 'Height (cm)' }}</th>
+          <th>{{ section.settings.col_chest | default: 'Chest (cm)' }}</th>
+          <th>{{ section.settings.col_waist | default: 'Waist (cm)' }}</th>
+          <th>{{ section.settings.col_length | default: 'Dress Length (cm)' }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for block in section.blocks %}
+          <tr {{ block.shopify_attributes }}>
+            <td><strong>{{ block.settings.age }}</strong></td>
+            <td>{{ block.settings.height }}</td>
+            <td>{{ block.settings.chest }}</td>
+            <td>{{ block.settings.waist }}</td>
+            <td>{{ block.settings.length }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if section.settings.note != blank %}
+    <p class="sakhi-size__note">{{ section.settings.note }}</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .sakhi-size__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .sakhi-size__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 12px;
+  }
+
+  .sakhi-size__subtitle {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .sakhi-size__accent {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sakhi-blush, #C17A8E), var(--sakhi-gold, #D4A853));
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+
+  .sakhi-size__table-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sakhi-size__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+  }
+
+  .sakhi-size__table thead {
+    background: linear-gradient(135deg, var(--sakhi-blush, #C17A8E), var(--sakhi-lavender, #9B7DC4));
+  }
+
+  .sakhi-size__table th {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFFFFF;
+    padding: 14px 18px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .sakhi-size__table td {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    padding: 14px 18px;
+    text-align: center;
+    border-bottom: 1px solid var(--sakhi-border, #F0E4DC);
+  }
+
+  .sakhi-size__table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .sakhi-size__table tbody tr:nth-child(even) {
+    background: rgba(255, 240, 243, 0.3);
+  }
+
+  .sakhi-size__table tbody tr:hover {
+    background: rgba(193, 122, 142, 0.08);
+  }
+
+  .sakhi-size__table td strong {
+    color: var(--sakhi-warm-dark, #2C2220);
+    font-weight: 600;
+  }
+
+  .sakhi-size__note {
+    text-align: center;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin-top: 24px;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-size__title {
+      font-size: 28px;
+    }
+    .sakhi-size__table th,
+    .sakhi-size__table td {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Size Guide",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Size Guide"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the perfect fit for your little one"
+    },
+    {
+      "type": "text",
+      "id": "col_age",
+      "label": "Column: Age",
+      "default": "Age Group"
+    },
+    {
+      "type": "text",
+      "id": "col_height",
+      "label": "Column: Height",
+      "default": "Height (cm)"
+    },
+    {
+      "type": "text",
+      "id": "col_chest",
+      "label": "Column: Chest",
+      "default": "Chest (cm)"
+    },
+    {
+      "type": "text",
+      "id": "col_waist",
+      "label": "Column: Waist",
+      "default": "Waist (cm)"
+    },
+    {
+      "type": "text",
+      "id": "col_length",
+      "label": "Column: Length",
+      "default": "Dress Length (cm)"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note text",
+      "default": "Measurements are approximate. Handmade items may vary slightly."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_row",
+      "name": "Size Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "age",
+          "label": "Age group",
+          "default": "0–1 years"
+        },
+        {
+          "type": "text",
+          "id": "height",
+          "label": "Height",
+          "default": "50–80"
+        },
+        {
+          "type": "text",
+          "id": "chest",
+          "label": "Chest",
+          "default": "40–48"
+        },
+        {
+          "type": "text",
+          "id": "waist",
+          "label": "Waist",
+          "default": "38–46"
+        },
+        {
+          "type": "text",
+          "id": "length",
+          "label": "Dress length",
+          "default": "30–40"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Guide",
+      "blocks": [
+        {
+          "type": "size_row",
+          "settings": {
+            "age": "0–1 years",
+            "height": "50–80",
+            "chest": "40–48",
+            "waist": "38–46",
+            "length": "30–40"
+          }
+        },
+        {
+          "type": "size_row",
+          "settings": {
+            "age": "1–3 years",
+            "height": "80–98",
+            "chest": "48–52",
+            "waist": "46–50",
+            "length": "40–52"
+          }
+        },
+        {
+          "type": "size_row",
+          "settings": {
+            "age": "3–5 years",
+            "height": "98–110",
+            "chest": "52–56",
+            "waist": "50–53",
+            "length": "52–60"
+          }
+        },
+        {
+          "type": "size_row",
+          "settings": {
+            "age": "5–8 years",
+            "height": "110–130",
+            "chest": "56–64",
+            "waist": "53–58",
+            "length": "60–72"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,213 @@
+{% comment %}
+  Sakhi – Handmade Story Section
+  Split layout: workshop image (left) + brand story text (right)
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-story__inner">
+    <div class="sakhi-story__image">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 800 | image_tag: alt: section.settings.heading, class: 'sakhi-story__img', loading: 'lazy' }}
+      {% else %}
+        <div class="sakhi-story__placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="sakhi-story__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="sakhi-story__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="sakhi-story__title">
+        {{ section.settings.heading | default: 'Our Handmade Story' }}
+      </h2>
+      <div class="sakhi-story__text">
+        {{ section.settings.text | default: '<p>Every Sakhi dress begins its journey in our local workshop, where skilled artisans and stitching students pour their heart into every stitch.</p><p>We believe in the beauty of handmade. Each piece carries the warmth of human touch, the precision of trained hands, and the love of creating something truly special for your child.</p><p>Our artisans are trained in traditional stitching techniques while embracing modern designs that children love to wear.</p>' }}
+      </div>
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link | default: '#' }}" class="sakhi-hero__btn sakhi-hero__btn--secondary">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-story__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .sakhi-story__inner {
+      flex-direction: row;
+      gap: 60px;
+    }
+    .sakhi-story__image { flex: 1; }
+    .sakhi-story__content { flex: 1; }
+  }
+
+  .sakhi-story__image {
+    border-radius: 16px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 16px 50px rgba(44, 34, 32, 0.1);
+  }
+
+  .sakhi-story__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .sakhi-story__placeholder {
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(135deg, #FFF0F3, #F5F0FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sakhi-story__placeholder svg {
+    width: 60%;
+    height: auto;
+    opacity: 0.5;
+  }
+
+  .sakhi-story__eyebrow {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sakhi-blush, #C17A8E);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .sakhi-story__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .sakhi-story__text {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin-bottom: 28px;
+  }
+
+  .sakhi-story__text p {
+    margin-bottom: 16px;
+  }
+
+  .sakhi-story__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-story__title {
+      font-size: 28px;
+    }
+    .sakhi-story__image {
+      max-width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Handmade Story",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Workshop image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "🧵 Our Story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Handmade Story"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Story text",
+      "default": "<p>Every Sakhi dress begins its journey in our local workshop, where skilled artisans and stitching students pour their heart into every stitch.</p><p>We believe in the beauty of handmade. Each piece carries the warmth of human touch, the precision of trained hands, and the love of creating something truly special for your child.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Handmade Story"
+    }
+  ]
+}
+{% endschema %}

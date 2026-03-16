@@ -264,6 +264,10 @@
         "padding-block-end": 0
       }
     },
+    "sakhi_product_extras": {
+      "type": "sakhi-product-extras",
+      "settings": {}
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -408,6 +412,7 @@
   },
   "order": [
     "main",
+    "sakhi_product_extras",
     "product_recommendations_qggXJq"
   ]
 }

@@ -1,0 +1,304 @@
+{% comment %}
+  Sakhi – Custom Dress Builder Promotion Section
+  Showcases the 3-step custom dress process with CTA
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style sakhi-custom-promo"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-custom-promo__inner">
+    <div class="sakhi-custom-promo__text">
+      {% if section.settings.eyebrow != blank %}
+        <p class="sakhi-custom-promo__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2 class="sakhi-custom-promo__title">
+        {{ section.settings.heading | default: 'Design a Dress Just for Your Child' }}
+      </h2>
+      <p class="sakhi-custom-promo__desc">
+        {{ section.settings.description | default: 'Create a one-of-a-kind dress your little one will love. Pick colors, sleeves, and even add their name.' }}
+      </p>
+
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link }}" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-custom-promo__cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="sakhi-custom-promo__steps">
+      {% for block in section.blocks %}
+        <div class="sakhi-custom-promo__step" {{ block.shopify_attributes }}>
+          <div class="sakhi-custom-promo__step-num">{{ forloop.index }}</div>
+          <div class="sakhi-custom-promo__step-icon">{{ block.settings.icon | default: '🎨' }}</div>
+          <h3 class="sakhi-custom-promo__step-title">{{ block.settings.title }}</h3>
+          {% if block.settings.description != blank %}
+            <p class="sakhi-custom-promo__step-desc">{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-custom-promo {
+    background: linear-gradient(135deg, #FFF0F3 0%, #F5F0FF 50%, #E8F4FD 100%);
+  }
+
+  .sakhi-custom-promo__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 48px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .sakhi-custom-promo__inner {
+      flex-direction: row;
+      text-align: left;
+      gap: 60px;
+      align-items: center;
+    }
+    .sakhi-custom-promo__text {
+      flex: 1;
+    }
+    .sakhi-custom-promo__steps {
+      flex: 1;
+    }
+  }
+
+  .sakhi-custom-promo__eyebrow {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sakhi-blush, #C17A8E);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .sakhi-custom-promo__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .sakhi-custom-promo__desc {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin-bottom: 28px;
+    max-width: 420px;
+  }
+
+  .sakhi-custom-promo__cta {
+    display: inline-block;
+  }
+
+  .sakhi-custom-promo__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .sakhi-custom-promo__step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+  }
+
+  .sakhi-custom-promo__step:hover {
+    transform: translateX(6px);
+    box-shadow: 0 8px 30px rgba(193, 122, 142, 0.12);
+    border-color: var(--sakhi-blush, #C17A8E);
+  }
+
+  .sakhi-custom-promo__step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--sakhi-blush, #C17A8E);
+    color: #FFFFFF;
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sakhi-custom-promo__step-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .sakhi-custom-promo__step-title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin: 0;
+    flex: 1;
+  }
+
+  .sakhi-custom-promo__step-desc {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin: 4px 0 0;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-custom-promo__title {
+      font-size: 28px;
+    }
+    .sakhi-custom-promo__desc {
+      max-width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom Dress Promo",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "✂️ Personalize It"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Design a Dress Just for Your Child"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Create a one-of-a-kind dress your little one will love. Pick colors, sleeves, and even add their name with hand embroidery."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Start Designing"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon emoji",
+          "default": "🎨"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Step description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Dress Promo",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🎨",
+            "title": "Choose Color",
+            "description": "Pick from pastel pink, lavender, sky blue, peach & more"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "👗",
+            "title": "Choose Sleeve Style",
+            "description": "Puff sleeves, flutter sleeves, sleeveless, or full sleeves"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "✨",
+            "title": "Add Name Embroidery",
+            "description": "Personalize with your child's name hand-stitched with love"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

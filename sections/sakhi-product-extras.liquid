@@ -1,0 +1,224 @@
+{% comment %}
+  Sakhi – Product Page Extras Section
+  Displays fabric details, production notice, simple reviews, and a customization cross-sell
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style sakhi-product-extras"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-pe__grid">
+    <div class="sakhi-pe__column">
+      <div class="sakhi-pe__block">
+        <h3 class="sakhi-pe__title">🧵 Fabric & Care</h3>
+        <div class="sakhi-pe__content">
+          <p>{{ section.settings.fabric_text | default: 'Our dresses are made from soft, child-friendly cotton and muslin that is gentle on delicate skin.' }}</p>
+          <ul class="sakhi-pe__list">
+            <li>Hand wash in cold water</li>
+            <li>Use mild detergent only</li>
+            <li>Do not use strong bleach</li>
+            <li>Air dry in shade</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="sakhi-pe__block">
+        <h3 class="sakhi-pe__title">⏳ Handmade to Order</h3>
+        <div class="sakhi-pe__content">
+          <p class="sakhi-pe__notice">
+            {{ section.settings.production_text | default: 'To maintain our high quality, this dress is handmade after your order is confirmed. Please allow <strong>3&ndash;5 business days</strong> for production before shipping.' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sakhi-pe__column">
+      <div class="sakhi-pe__block sakhi-pe__block--custom">
+        <h3 class="sakhi-pe__title">✨ Make it Custom?</h3>
+        <div class="sakhi-pe__content">
+          <p>Want this dress in a different color, or with your child's name embroidered?</p>
+          <a href="/pages/custom-dress" class="sakhi-pe__custom-btn">Design a Custom Dress &rarr;</a>
+        </div>
+      </div>
+      
+      <div class="sakhi-pe__block">
+        <h3 class="sakhi-pe__title">📏 Size Guide</h3>
+        <div class="sakhi-pe__content">
+          <p>Unsure about the fit? Check our detailed size guide to find the perfect dress for your little one's age group.</p>
+          <button class="sakhi-pe__link-btn" onclick="document.querySelector('.sakhi-size__table-wrap')?.scrollIntoView({behavior: 'smooth'})">
+            View Size Chart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-product-extras {
+    border-top: 1px solid var(--sakhi-border, #F0E4DC);
+    padding-top: 48px !important;
+  }
+
+  .sakhi-pe__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sakhi-pe__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .sakhi-pe__block {
+    margin-bottom: 32px;
+  }
+
+  .sakhi-pe__block:last-child {
+    margin-bottom: 0;
+  }
+
+  .sakhi-pe__block--custom {
+    background: linear-gradient(135deg, var(--sakhi-blush-light, #FFF0F3), #F5F0FF);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px dashed var(--sakhi-blush, #C17A8E);
+  }
+
+  .sakhi-pe__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sakhi-pe__content p {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    margin-bottom: 12px;
+  }
+
+  .sakhi-pe__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sakhi-pe__list {
+    margin: 0 0 0 20px;
+    padding: 0;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    line-height: 1.6;
+  }
+
+  .sakhi-pe__list li {
+    margin-bottom: 6px;
+  }
+
+  .sakhi-pe__notice {
+    background: rgba(212, 168, 83, 0.1);
+    border-left: 3px solid var(--sakhi-gold, #D4A853);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .sakhi-pe__custom-btn {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sakhi-blush, #C17A8E);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .sakhi-pe__custom-btn:hover {
+    color: var(--sakhi-blush-dark, #A8637A);
+    text-decoration: underline;
+  }
+
+  .sakhi-pe__link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .sakhi-pe__link-btn:hover {
+    color: var(--sakhi-gold, #D4A853);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Extras",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "fabric_text",
+      "label": "Fabric Description",
+      "default": "Our dresses are made from soft, child-friendly cotton and muslin that is gentle on delicate skin."
+    },
+    {
+      "type": "textarea",
+      "id": "production_text",
+      "label": "Production Notice",
+      "default": "To maintain our high quality, this dress is handmade after your order is confirmed. Please allow <strong>3&ndash;5 business days</strong> for production before shipping."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Extras"
+    }
+  ]
+}
+{% endschema %}

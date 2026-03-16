@@ -1,0 +1,264 @@
+{% comment %}
+  Sakhi – Instagram Community Section
+  Image grid showing children wearing Sakhi dresses
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-ig__header">
+    <h2 class="sakhi-ig__title">
+      {{ section.settings.heading | default: 'Our Little Stars' }}
+    </h2>
+    <p class="sakhi-ig__subtitle">
+      Tag <a href="{{ section.settings.ig_link | default: '#' }}">@{{ section.settings.ig_handle | default: 'sakhi_kids' }}</a> to be featured
+    </p>
+    <div class="sakhi-ig__accent"></div>
+  </div>
+
+  <div class="sakhi-ig__grid">
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.link | default: '#' }}" class="sakhi-ig__item" {{ block.shopify_attributes }}>
+        <div class="sakhi-ig__image-wrap">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 400 | image_tag: alt: 'Instagram photo', class: 'sakhi-ig__img', loading: 'lazy' }}
+          {% else %}
+            <div class="sakhi-ig__placeholder">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+          <div class="sakhi-ig__overlay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.show_button %}
+    <div class="sakhi-ig__btn-wrap">
+      <a href="{{ section.settings.ig_link | default: '#' }}" class="sakhi-hero__btn sakhi-hero__btn--secondary">
+        Follow Us on Instagram
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .sakhi-ig__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .sakhi-ig__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 12px;
+  }
+
+  .sakhi-ig__subtitle {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 15px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+  }
+
+  .sakhi-ig__subtitle a {
+    color: var(--sakhi-blush, #C17A8E);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .sakhi-ig__subtitle a:hover {
+    text-decoration: underline;
+  }
+
+  .sakhi-ig__accent {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sakhi-blush, #C17A8E), var(--sakhi-gold, #D4A853));
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+
+  .sakhi-ig__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sakhi-ig__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 0;
+    }
+  }
+
+  .sakhi-ig__item {
+    display: block;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+
+  .sakhi-ig__image-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .sakhi-ig__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sakhi-ig__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FFF0F3, #F5E6C8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sakhi-ig__placeholder svg {
+    width: 30%;
+    height: auto;
+    opacity: 0.4;
+    color: var(--sakhi-blush);
+  }
+
+  .sakhi-ig__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(193, 122, 142, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .sakhi-ig__item:hover .sakhi-ig__img {
+    transform: scale(1.08);
+  }
+
+  .sakhi-ig__item:hover .sakhi-ig__overlay {
+    opacity: 1;
+  }
+
+  .sakhi-ig__btn-wrap {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-ig__title { font-size: 28px; }
+    .sakhi-ig__grid { gap: 8px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Instagram Community",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Little Stars"
+    },
+    {
+      "type": "text",
+      "id": "ig_handle",
+      "label": "Instagram handle (without @)",
+      "default": "sakhi_kids"
+    },
+    {
+      "type": "url",
+      "id": "ig_link",
+      "label": "Instagram profile link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show follow button",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Image",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Instagram post link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Community",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

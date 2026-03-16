@@ -1,0 +1,353 @@
+{% comment %}
+  Sakhi – AI Try-On Coming Soon Section
+  Announces the upcoming AI virtual try-on feature with early access CTA
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style sakhi-ai-coming"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-ai-coming__inner">
+    <div class="sakhi-ai-coming__content">
+      <div class="sakhi-ai-coming__badge">🚀 Coming Soon</div>
+      <h2 class="sakhi-ai-coming__title">
+        {{ section.settings.heading | default: 'See the Dress on Your Child' }}
+      </h2>
+      <p class="sakhi-ai-coming__desc">
+        {{ section.settings.description | default: 'Soon you will be able to upload a photo of your child and preview how any dress will look using our AI visualization technology. See the perfect outfit before you buy.' }}
+      </p>
+
+      <div class="sakhi-ai-coming__features">
+        {% for block in section.blocks %}
+          <div class="sakhi-ai-coming__feature" {{ block.shopify_attributes }}>
+            <span class="sakhi-ai-coming__feature-icon">{{ block.settings.icon | default: '✨' }}</span>
+            <span class="sakhi-ai-coming__feature-text">{{ block.settings.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link | default: '#' }}" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-ai-coming__cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="sakhi-ai-coming__preview">
+      <div class="sakhi-ai-coming__mockup">
+        <div class="sakhi-ai-coming__mockup-header">
+          <span class="sakhi-ai-coming__mockup-dot"></span>
+          <span class="sakhi-ai-coming__mockup-dot"></span>
+          <span class="sakhi-ai-coming__mockup-dot"></span>
+        </div>
+        <div class="sakhi-ai-coming__mockup-body">
+          <div class="sakhi-ai-coming__mockup-upload">
+            <span style="font-size: 40px;">📸</span>
+            <p>Upload your child's photo</p>
+          </div>
+          <div class="sakhi-ai-coming__mockup-arrow">→</div>
+          <div class="sakhi-ai-coming__mockup-result">
+            <span style="font-size: 40px;">👗</span>
+            <p>AI preview appears here</p>
+          </div>
+        </div>
+        <div class="sakhi-ai-coming__mockup-footer">
+          <span>Powered by AI ✨</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-ai-coming {
+    background: linear-gradient(135deg, #2C2220 0%, #3D2F3A 50%, #2D2840 100%);
+    color: #F0E4DC;
+  }
+
+  .sakhi-ai-coming__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .sakhi-ai-coming__inner {
+      flex-direction: row;
+      gap: 60px;
+    }
+    .sakhi-ai-coming__content { flex: 1; }
+    .sakhi-ai-coming__preview { flex: 1; }
+  }
+
+  .sakhi-ai-coming__badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sakhi-gold, #D4A853), var(--sakhi-blush, #C17A8E));
+    color: #FFFFFF;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .sakhi-ai-coming__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 38px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .sakhi-ai-coming__desc {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    line-height: 1.7;
+    color: #D4C8BF;
+    margin-bottom: 28px;
+    max-width: 480px;
+  }
+
+  .sakhi-ai-coming__features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .sakhi-ai-coming__feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sakhi-ai-coming__feature-icon {
+    font-size: 20px;
+  }
+
+  .sakhi-ai-coming__feature-text {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    color: #E8DDD6;
+  }
+
+  .sakhi-ai-coming__cta {
+    display: inline-block;
+  }
+
+  /* Mockup */
+  .sakhi-ai-coming__mockup {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .sakhi-ai-coming__mockup-header {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .sakhi-ai-coming__mockup-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sakhi-ai-coming__mockup-dot:nth-child(1) { background: #FF6B6B; }
+  .sakhi-ai-coming__mockup-dot:nth-child(2) { background: #FFD93D; }
+  .sakhi-ai-coming__mockup-dot:nth-child(3) { background: #6BCB77; }
+
+  .sakhi-ai-coming__mockup-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 24px;
+  }
+
+  .sakhi-ai-coming__mockup-upload,
+  .sakhi-ai-coming__mockup-result {
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    flex: 1;
+  }
+
+  .sakhi-ai-coming__mockup-upload p,
+  .sakhi-ai-coming__mockup-result p {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 12px;
+    color: #B0A39A;
+    margin: 8px 0 0;
+  }
+
+  .sakhi-ai-coming__mockup-arrow {
+    font-size: 24px;
+    color: var(--sakhi-gold, #D4A853);
+    animation: sakhi-arrow-pulse 2s ease-in-out infinite;
+  }
+
+  .sakhi-ai-coming__mockup-footer {
+    text-align: center;
+    padding: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 12px;
+    color: #8A7D76;
+  }
+
+  @keyframes sakhi-arrow-pulse {
+    0%, 100% { transform: translateX(0); opacity: 1; }
+    50% { transform: translateX(6px); opacity: 0.6; }
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-ai-coming__title {
+      font-size: 28px;
+    }
+    .sakhi-ai-coming__mockup-body {
+      flex-direction: column;
+      gap: 12px;
+      padding: 24px 16px;
+    }
+    .sakhi-ai-coming__mockup-arrow {
+      transform: rotate(90deg);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "AI Try-On Coming Soon",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See the Dress on Your Child"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Soon you will be able to upload a photo of your child and preview how any dress will look using our AI visualization technology. See the perfect outfit before you buy."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Join Early Access"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon emoji",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Feature description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Try-On Coming Soon",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "📸",
+            "text": "Upload any photo of your child"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🤖",
+            "text": "AI generates a realistic dress preview"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "💫",
+            "text": "Try unlimited outfits for free"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🛒",
+            "text": "Buy with confidence"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

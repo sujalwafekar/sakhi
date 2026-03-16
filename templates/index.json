@@ -8,482 +8,331 @@
  * ------------------------------------------------------------
  */ {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
-      "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Adorable Outfits for Your Little Stars ✨</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h1",
-            "font": "var(--font-heading--family)",
-            "font_size": "2.5rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_sub_abc1": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Premium baby clothing crafted with love. Organic fabrics, traditional designs, and modern comfort — all in one place.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1.1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop Now",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        },
-        "button_ai_xyz1": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "✨ Try AI Look",
-            "link": "",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_YLPk4p",
-        "text_sub_abc1",
-        "button_H9gpTf",
-        "button_ai_xyz1"
-      ],
-      "name": "t:names.hero",
+    "sakhi_hero": {
+      "type": "sakhi-hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 16,
-        "section_width": "full-width",
-        "section_height": "large",
-        "section_height_custom": 70,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#2C222066",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": true,
-        "reflection_opacity": 60,
-        "padding-block-start": 120,
-        "padding-block-end": 80
+        "eyebrow": "✨ Handcrafted with Love",
+        "heading": "Handmade Dresses for Your Little One",
+        "subheading": "Beautiful frocks crafted with love and comfort. Soft fabrics, unique designs, made just for your child.",
+        "button_1_label": "Shop Dresses",
+        "button_1_link": "shopify:\/\/collections\/all",
+        "button_2_label": "Customize a Dress",
+        "button_2_link": "shopify:\/\/pages\/custom-dress",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
-    "categories_abc123": {
-      "type": "sample-categories",
-      "blocks": {
-        "cat_1": {
-          "type": "category",
-          "settings": {
-            "title": "Newborns",
-            "subtitle": "0-6 months"
-          }
-        },
-        "cat_2": {
-          "type": "category",
-          "settings": {
-            "title": "Infants",
-            "subtitle": "6-12 months"
-          }
-        },
-        "cat_3": {
-          "type": "category",
-          "settings": {
-            "title": "Toddlers",
-            "subtitle": "1-3 years"
-          }
-        },
-        "cat_4": {
-          "type": "category",
-          "settings": {
-            "title": "Kids",
-            "subtitle": "3-5 years"
-          }
-        },
-        "cat_5": {
-          "type": "category",
-          "settings": {
-            "title": "Baby Girls",
-            "subtitle": "All ages"
-          }
-        },
-        "cat_6": {
-          "type": "category",
-          "settings": {
-            "title": "Baby Boys",
-            "subtitle": "All ages"
-          }
-        }
-      },
-      "block_order": [
-        "cat_1",
-        "cat_2",
-        "cat_3",
-        "cat_4",
-        "cat_5",
-        "cat_6"
-      ],
+    "sakhi_featured_dresses": {
+      "type": "sakhi-featured-dresses",
       "settings": {
-        "heading": "Shop by Category",
-        "subheading": "Handpicked collections for your little ones",
-        "color_scheme": "scheme-1",
+        "heading": "Our Beautiful Dresses",
+        "subheading": "Handmade with love for your little one",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_text": "View All Dresses",
         "padding-block-start": 60,
         "padding-block-end": 60
       }
     },
-    "products_def456": {
-      "type": "sample-products",
+    "sakhi_why_choose": {
+      "type": "sakhi-why-choose",
       "blocks": {
-        "prod_1": {
-          "type": "product",
+        "block1": {
+          "type": "feature",
           "settings": {
-            "title": "Organic Cotton Onesie",
-            "price": "₹799",
-            "compare_price": "₹999",
-            "badge": "Sale"
+            "icon": "🧶",
+            "title": "Soft Child-Friendly Fabric",
+            "description": "Gentle, breathable fabrics selected to keep your child comfortable all day long."
           }
         },
-        "prod_2": {
-          "type": "product",
+        "block2": {
+          "type": "feature",
           "settings": {
-            "title": "Floral Frock Set",
-            "price": "₹1,299",
-            "badge": "New"
+            "icon": "✋",
+            "title": "Handmade Craftsmanship",
+            "description": "Each dress is carefully stitched by skilled artisans for superior quality and finish."
           }
         },
-        "prod_3": {
-          "type": "product",
+        "block3": {
+          "type": "feature",
           "settings": {
-            "title": "Baby Boy Kurta Pajama",
-            "price": "₹1,499"
+            "icon": "💛",
+            "title": "Comfortable Fit",
+            "description": "Designed for easy movement so your child can play, walk, and stay comfortable."
           }
         },
-        "prod_4": {
-          "type": "product",
+        "block4": {
+          "type": "feature",
           "settings": {
-            "title": "Muslin Swaddle Blanket",
-            "price": "₹599",
-            "compare_price": "₹899",
-            "badge": "Best Seller"
-          }
-        },
-        "prod_5": {
-          "type": "product",
-          "settings": {
-            "title": "Embroidered Romper",
-            "price": "₹1,099"
-          }
-        },
-        "prod_6": {
-          "type": "product",
-          "settings": {
-            "title": "Cotton Lehenga Set",
-            "price": "₹1,899",
-            "badge": "Premium"
-          }
-        },
-        "prod_7": {
-          "type": "product",
-          "settings": {
-            "title": "Nightsuit Twin Pack",
-            "price": "₹1,199",
-            "compare_price": "₹1,499"
-          }
-        },
-        "prod_8": {
-          "type": "product",
-          "settings": {
-            "title": "Hand-Knit Booties",
-            "price": "₹499",
-            "badge": "Trending"
+            "icon": "🎨",
+            "title": "Unique Handmade Designs",
+            "description": "Every dress features carefully designed patterns that make each piece stand out."
           }
         }
       },
       "block_order": [
-        "prod_1",
-        "prod_2",
-        "prod_3",
-        "prod_4",
-        "prod_5",
-        "prod_6",
-        "prod_7",
-        "prod_8"
+        "block1",
+        "block2",
+        "block3",
+        "block4"
       ],
       "settings": {
-        "heading": "Our Best Sellers",
-        "subheading": "Most loved by parents everywhere",
-        "view_all_text": "View All Products",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "heading": "Why Parents Choose Sakhi",
+        "subheading": "Made with care, worn with joy",
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     },
-    "ai_banner_ghi789": {
-      "type": "ai-tryon-banner",
-      "settings": {}
-    },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "sakhi_custom_promo": {
+      "type": "sakhi-custom-promo",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "step1": {
+          "type": "step",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-heading--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "icon": "🎨",
+            "title": "Choose Color",
+            "description": "Pick from pastel pink, lavender, sky blue, peach & more"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "step2": {
+          "type": "step",
           "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "icon": "👗",
+            "title": "Choose Sleeve Style",
+            "description": "Puff sleeves, flutter sleeves, sleeveless, or full sleeves"
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "icon": "✨",
+            "title": "Add Name Embroidery",
+            "description": "Personalize with your child's name hand-stitched with love"
+          }
         }
       },
-      "name": "Featured collection",
+      "block_order": [
+        "step1",
+        "step2",
+        "step3"
+      ],
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "eyebrow": "✂️ Personalize It",
+        "heading": "Design a Dress Just for Your Child",
+        "description": "Create a one-of-a-kind dress your little one will love. Pick colors, sleeves, and even add their name with hand embroidery.",
+        "cta_label": "Start Designing",
+        "cta_link": "shopify:\/\/pages\/custom-dress",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "sakhi_ai_coming": {
+      "type": "sakhi-ai-tryon-coming",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "📸",
+            "text": "Upload any photo of your child"
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "🤖",
+            "text": "AI generates a realistic dress preview"
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "💫",
+            "text": "Try unlimited outfits for free"
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "🛒",
+            "text": "Buy with confidence"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "heading": "See the Dress on Your Child",
+        "description": "Soon you will be able to upload a photo of your child and preview how any dress will look using our AI visualization technology. See the perfect outfit before you buy.",
+        "cta_label": "Join Early Access",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
+    "sakhi_handmade_story": {
+      "type": "sakhi-handmade-story",
+      "settings": {
+        "eyebrow": "🧵 Our Story",
+        "heading": "Our Handmade Story",
+        "text": "<p>Every Sakhi dress begins its journey in our local workshop, where skilled artisans and stitching students pour their heart into every stitch.</p><p>We believe in the beauty of handmade. Each piece carries the warmth of human touch, the precision of trained hands, and the love of creating something truly special for your child.</p>",
+        "cta_label": "Learn More",
+        "cta_link": "shopify:\/\/pages\/about",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "sakhi_size_guide": {
+      "type": "sakhi-size-guide",
+      "blocks": {
+        "r1": {
+          "type": "size_row",
+          "settings": {
+            "age": "0–1 years",
+            "height": "50–80",
+            "chest": "40–48",
+            "waist": "38–46",
+            "length": "30–40"
+          }
+        },
+        "r2": {
+          "type": "size_row",
+          "settings": {
+            "age": "1–3 years",
+            "height": "80–98",
+            "chest": "48–52",
+            "waist": "46–50",
+            "length": "40–52"
+          }
+        },
+        "r3": {
+          "type": "size_row",
+          "settings": {
+            "age": "3–5 years",
+            "height": "98–110",
+            "chest": "52–56",
+            "waist": "50–53",
+            "length": "52–60"
+          }
+        },
+        "r4": {
+          "type": "size_row",
+          "settings": {
+            "age": "5–8 years",
+            "height": "110–130",
+            "chest": "56–64",
+            "waist": "53–58",
+            "length": "60–72"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "heading": "Size Guide",
+        "subheading": "Find the perfect fit for your little one",
+        "note": "Measurements are approximate. Handmade items may vary slightly.",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "sakhi_reviews": {
+      "type": "sakhi-reviews",
+      "blocks": {
+        "rev1": {
+          "type": "review",
+          "settings": {
+            "text": "The dress was absolutely beautiful and fit perfectly. The fabric is so soft, my daughter never wanted to take it off!",
+            "author": "Priya S."
+          }
+        },
+        "rev2": {
+          "type": "review",
+          "settings": {
+            "text": "Such amazing handmade quality. The custom embroidery with her name made the outfit so incredibly special.",
+            "author": "Meera T."
+          }
+        },
+        "rev3": {
+          "type": "review",
+          "settings": {
+            "text": "I was looking for something unique for her birthday. This frock exceeded all my expectations. Highly recommend Sakhi!",
+            "author": "Anjali K."
+          }
+        }
+      },
+      "block_order": [
+        "rev1",
+        "rev2",
+        "rev3"
+      ],
+      "settings": {
+        "heading": "What Parents Are Saying",
+        "subheading": "Honest reviews from our lovely customers",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "sakhi_instagram": {
+      "type": "sakhi-instagram",
+      "blocks": {
+        "ig1": {
+          "type": "image"
+        },
+        "ig2": {
+          "type": "image"
+        },
+        "ig3": {
+          "type": "image"
+        },
+        "ig4": {
+          "type": "image"
+        }
+      },
+      "block_order": [
+        "ig1",
+        "ig2",
+        "ig3",
+        "ig4"
+      ],
+      "settings": {
+        "heading": "Our Little Stars",
+        "ig_handle": "sakhi_kids",
+        "show_button": true,
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "sakhi_final_cta": {
+      "type": "sakhi-final-cta",
+      "settings": {
+        "heading": "Make Your Child's Outfit Special",
+        "subheading": "Browse our collection of handmade ready-to-wear dresses or design a custom piece.",
+        "button_1_label": "Shop Dresses",
+        "button_1_link": "shopify:\/\/collections\/all",
+        "button_2_label": "Customize a Dress",
+        "button_2_link": "shopify:\/\/pages\/custom-dress",
+        "padding-block-start": 80,
+        "padding-block-end": 80
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "categories_abc123",
-    "products_def456",
-    "ai_banner_ghi789",
-    "product_list_fa6P9H"
+    "sakhi_hero",
+    "sakhi_featured_dresses",
+    "sakhi_why_choose",
+    "sakhi_custom_promo",
+    "sakhi_ai_coming",
+    "sakhi_handmade_story",
+    "sakhi_size_guide",
+    "sakhi_reviews",
+    "sakhi_instagram",
+    "sakhi_final_cta"
   ]
 }

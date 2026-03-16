@@ -1,0 +1,569 @@
+{% comment %}
+  Sakhi – Custom Dress Builder Section
+  A multi-step form to build a custom dress.
+  Saves choices as line item properties to cart.
+{% endcomment %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style sakhi-builder-section"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="sakhi-builder__header">
+    <h1 class="sakhi-builder__title">{{ section.settings.heading | default: 'Design Your Custom Dress' }}</h1>
+    <p class="sakhi-builder__subtitle">{{ section.settings.subheading | default: 'Follow the steps below to create a unique outfit for your little one.' }}</p>
+  </div>
+
+  <div class="sakhi-builder__container">
+    <form action="{{ routes.cart_add_url }}" method="post" id="SakhiCustomDressForm" class="sakhi-builder__form">
+      {% comment %} Hidden input for the base product - requires a base product in Shopify {% endcomment %}
+      <input type="hidden" name="id" value="{{ section.settings.base_product.variants.first.id }}">
+      <input type="hidden" name="quantity" value="1">
+
+      <div class="sakhi-builder__progress">
+        <div class="sakhi-builder__progress-bar" id="builderProgress"></div>
+        <div class="sakhi-builder__steps-tabs">
+          <button type="button" class="sakhi-builder__tab active" data-step="1">1. Style</button>
+          <button type="button" class="sakhi-builder__tab" data-step="2">2. Color</button>
+          <button type="button" class="sakhi-builder__tab" data-step="3">3. Sleeves</button>
+          <button type="button" class="sakhi-builder__tab" data-step="4">4. Embroidery</button>
+          <button type="button" class="sakhi-builder__tab" data-step="5">5. Review</button>
+        </div>
+      </div>
+
+      <div class="sakhi-builder__steps-wrapper">
+        
+        {% comment %} STEP 1: STYLE {% endcomment %}
+        <div class="sakhi-builder__step active" id="step-1">
+          <h2 class="sakhi-builder__step-title">Choose Dress Style</h2>
+          <div class="sakhi-builder__options-grid">
+            {% assign styles = "A-Line Frock,Gathered Dress,Tutu Dress,Layered Gown" | split: "," %}
+            {% for style in styles %}
+              <div class="sakhi-builder__option">
+                <input type="radio" name="properties[Style]" id="style-{{ forloop.index }}" value="{{ style }}" class="sakhi-builder__radio" {% if forloop.first %}checked{% endif %}>
+                <label for="style-{{ forloop.index }}" class="sakhi-builder__label">
+                  <div class="sakhi-builder__option-visual">👗</div>
+                  <div class="sakhi-builder__option-text">{{ style }}</div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="sakhi-builder__actions">
+            <button type="button" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-builder__next" data-next="2">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        {% comment %} STEP 2: COLOR {% endcomment %}
+        <div class="sakhi-builder__step" id="step-2">
+          <h2 class="sakhi-builder__step-title">Select Color</h2>
+          <div class="sakhi-builder__options-grid sakhi-builder__options-grid--colors">
+            {% assign colors = "Pastel Pink:#FFD1DC,Lavender:#E6E6FA,Sky Blue:#87CEEB,Mint Green:#98FF98,Peach:#FFE5B4,Cream:#FFFDD0" | split: "," %}
+            {% for color_data in colors %}
+              {% assign c = color_data | split: ":" %}
+              <div class="sakhi-builder__option">
+                <input type="radio" name="properties[Color]" id="color-{{ forloop.index }}" value="{{ c[0] }}" class="sakhi-builder__radio" {% if forloop.first %}checked{% endif %}>
+                <label for="color-{{ forloop.index }}" class="sakhi-builder__label sakhi-builder__label--color">
+                  <div class="sakhi-builder__color-swatch" style="background-color: {{ c[1] }};"></div>
+                  <div class="sakhi-builder__option-text">{{ c[0] }}</div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="sakhi-builder__actions">
+            <button type="button" class="sakhi-hero__btn sakhi-cta__btn--white sakhi-builder__prev" data-prev="1">&larr; Back</button>
+            <button type="button" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-builder__next" data-next="3">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        {% comment %} STEP 3: SLEEVES {% endcomment %}
+        <div class="sakhi-builder__step" id="step-3">
+          <h2 class="sakhi-builder__step-title">Choose Sleeve Style</h2>
+          <div class="sakhi-builder__options-grid">
+            {% assign sleeves = "Sleeveless,Puff Sleeves,Flutter Sleeves,Full Sleeves" | split: "," %}
+            {% for sleeve in sleeves %}
+              <div class="sakhi-builder__option">
+                <input type="radio" name="properties[Sleeves]" id="sleeve-{{ forloop.index }}" value="{{ sleeve }}" class="sakhi-builder__radio" {% if forloop.first %}checked{% endif %}>
+                <label for="sleeve-{{ forloop.index }}" class="sakhi-builder__label">
+                  <div class="sakhi-builder__option-visual">✨</div>
+                  <div class="sakhi-builder__option-text">{{ sleeve }}</div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="sakhi-builder__actions">
+            <button type="button" class="sakhi-hero__btn sakhi-cta__btn--white sakhi-builder__prev" data-prev="2">&larr; Back</button>
+            <button type="button" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-builder__next" data-next="4">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        {% comment %} STEP 4: EMBROIDERY {% endcomment %}
+        <div class="sakhi-builder__step" id="step-4">
+          <h2 class="sakhi-builder__step-title">Add Embroidery (Optional)</h2>
+          <p class="sakhi-builder__step-desc">Would you like your child's name hand-stitched on the dress?</p>
+          
+          <div class="sakhi-builder__embroidery-wrap">
+            <div class="sakhi-builder__option" style="margin-bottom: 20px;">
+              <input type="radio" name="embroidery_choice" id="emb-no" value="No" class="sakhi-builder__radio" checked onchange="document.getElementById('embroidery-wrap').style.display='none'; document.getElementById('emb-text').value='';">
+              <label for="emb-no" class="sakhi-builder__label" style="text-align:left; padding: 16px;">
+                <strong>No Embroidery</strong>
+              </label>
+            </div>
+            
+            <div class="sakhi-builder__option" style="margin-bottom: 20px;">
+              <input type="radio" name="embroidery_choice" id="emb-yes" value="Yes" class="sakhi-builder__radio" onchange="document.getElementById('embroidery-wrap').style.display='block';">
+              <label for="emb-yes" class="sakhi-builder__label" style="text-align:left; padding: 16px;">
+                <strong>Yes, Add Name (+$10)</strong>
+              </label>
+            </div>
+
+            <div id="embroidery-wrap" style="display: none; width: 100%;">
+              <label for="emb-text" class="sakhi-builder__input-label">Child's Name:</label>
+              <input type="text" id="emb-text" name="properties[Embroidery Name]" class="sakhi-builder__input" placeholder="e.g. Aria" maxlength="12">
+            </div>
+          </div>
+
+          <div class="sakhi-builder__actions">
+            <button type="button" class="sakhi-hero__btn sakhi-cta__btn--white sakhi-builder__prev" data-prev="3">&larr; Back</button>
+            <button type="button" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-builder__next" data-next="5">Review Design &rarr;</button>
+          </div>
+        </div>
+
+        {% comment %} STEP 5: REVIEW {% endcomment %}
+        <div class="sakhi-builder__step" id="step-5">
+          <h2 class="sakhi-builder__step-title">Review Your Custom Dress</h2>
+          
+          <div class="sakhi-builder__summary">
+            <div class="sakhi-builder__summary-item">
+              <span>Style:</span>
+              <strong id="sum-style">A-Line Frock</strong>
+            </div>
+            <div class="sakhi-builder__summary-item">
+              <span>Color:</span>
+              <strong id="sum-color">Pastel Pink</strong>
+            </div>
+            <div class="sakhi-builder__summary-item">
+              <span>Sleeves:</span>
+              <strong id="sum-sleeves">Sleeveless</strong>
+            </div>
+            <div class="sakhi-builder__summary-item">
+              <span>Embroidery:</span>
+              <strong id="sum-emb">None</strong>
+            </div>
+          </div>
+
+          <div class="sakhi-builder__notice">
+            Please note: Custom dresses take exactly 5-7 business days to handcraft before shipping.
+          </div>
+
+          <div class="sakhi-builder__actions">
+            <button type="button" class="sakhi-hero__btn sakhi-cta__btn--white sakhi-builder__prev" data-prev="4">&larr; Back</button>
+            <button type="submit" class="sakhi-hero__btn sakhi-hero__btn--primary sakhi-builder__submit">
+              {% if section.settings.base_product != blank %}
+                Add to Cart - {{ section.settings.base_product.price | money }}
+              {% else %}
+                Add to Cart (Please select base product in editor)
+              {% endif %}
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sakhi-builder-section {
+    padding: 60px 20px;
+    background: #FFF8F3;
+  }
+
+  .sakhi-builder__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .sakhi-builder__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 12px;
+  }
+
+  .sakhi-builder__subtitle {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+  }
+
+  .sakhi-builder__container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(44, 34, 32, 0.08);
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    overflow: hidden;
+  }
+
+  .sakhi-builder__progress {
+    position: relative;
+    border-bottom: 1px solid var(--sakhi-border, #F0E4DC);
+    background: #FAFAFA;
+  }
+
+  .sakhi-builder__progress-bar {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 3px;
+    background: var(--sakhi-blush, #C17A8E);
+    width: 20%;
+    transition: width 0.4s ease;
+  }
+
+  .sakhi-builder__steps-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sakhi-builder__steps-tabs::-webkit-scrollbar { display: none; }
+
+  .sakhi-builder__tab {
+    flex: 1;
+    min-width: 120px;
+    background: none;
+    border: none;
+    padding: 16px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    opacity: 0.6;
+    cursor: default;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .sakhi-builder__tab.active {
+    opacity: 1;
+    color: var(--sakhi-blush-dark, #A8637A);
+  }
+
+  .sakhi-builder__steps-wrapper {
+    padding: 40px 32px;
+  }
+
+  .sakhi-builder__step {
+    display: none;
+    animation: sakhiFadeIn 0.4s ease;
+  }
+
+  .sakhi-builder__step.active {
+    display: block;
+  }
+
+  @keyframes sakhiFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .sakhi-builder__step-title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .sakhi-builder__step-desc {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+  }
+
+  .sakhi-builder__options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  @media screen and (min-width: 600px) {
+    .sakhi-builder__options-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .sakhi-builder__options-grid--colors {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .sakhi-builder__radio {
+    display: none;
+  }
+
+  .sakhi-builder__label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 24px 12px;
+    border: 2px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%;
+    background: #FFFFFF;
+  }
+
+  .sakhi-builder__label--color {
+    flex-direction: row;
+    gap: 12px;
+    padding: 16px;
+    justify-content: flex-start;
+  }
+
+  .sakhi-builder__radio:checked + .sakhi-builder__label {
+    border-color: var(--sakhi-blush, #C17A8E);
+    background: var(--sakhi-blush-light, #FFF0F3);
+    box-shadow: 0 4px 15px rgba(193, 122, 142, 0.15);
+  }
+
+  .sakhi-builder__option-visual {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .sakhi-builder__color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .sakhi-builder__option-text {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--sakhi-warm-dark, #2C2220);
+  }
+
+  .sakhi-builder__input-label {
+    display: block;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--sakhi-warm-dark, #2C2220);
+  }
+
+  .sakhi-builder__input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 8px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+  }
+
+  .sakhi-builder__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--sakhi-border, #F0E4DC);
+  }
+
+  .sakhi-builder__step#step-1 .sakhi-builder__actions {
+    justify-content: flex-end;
+  }
+
+  .sakhi-builder__submit {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 600px) {
+    .sakhi-builder__submit { width: auto; }
+  }
+
+  /* Summary */
+  .sakhi-builder__summary {
+    background: #FAFAFA;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .sakhi-builder__summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--sakhi-border, #F0E4DC);
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 16px;
+  }
+
+  .sakhi-builder__summary-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .sakhi-builder__summary-item span {
+    color: var(--sakhi-warm-gray, #4A3F3A);
+  }
+
+  .sakhi-builder__summary-item strong {
+    color: var(--sakhi-warm-dark, #2C2220);
+  }
+
+  .sakhi-builder__notice {
+    background: #FFF9C4;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 14px;
+    color: #856404;
+    margin-bottom: 24px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sakhi-builder__title { font-size: 32px; }
+    .sakhi-builder__steps-wrapper { padding: 24px 16px; }
+    .sakhi-builder__actions { flex-direction: column; gap: 16px; }
+    .sakhi-builder__actions button { width: 100%; }
+    .sakhi-builder__step#step-1 .sakhi-builder__actions { justify-content: center; }
+  }
+{% endstylesheet %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('SakhiCustomDressForm');
+    if(!form) return;
+
+    const tabs = document.querySelectorAll('.sakhi-builder__tab');
+    const steps = document.querySelectorAll('.sakhi-builder__step');
+    const progressBar = document.getElementById('builderProgress');
+
+    // Navigation Buttons
+    const nextBtns = document.querySelectorAll('.sakhi-builder__next');
+    const prevBtns = document.querySelectorAll('.sakhi-builder__prev');
+
+    function updateStep(stepNum) {
+      steps.forEach(s => s.classList.remove('active'));
+      tabs.forEach(t => t.classList.remove('active'));
+
+      document.getElementById(`step-${stepNum}`).classList.add('active');
+      document.querySelector(`.sakhi-builder__tab[data-step="${stepNum}"]`).classList.add('active');
+      
+      progressBar.style.width = `${(stepNum / 5) * 100}%`;
+
+      // If review step
+      if(stepNum == 5) {
+        document.getElementById('sum-style').textContent = document.querySelector('input[name="properties[Style]"]:checked')?.value || 'N/A';
+        document.getElementById('sum-color').textContent = document.querySelector('input[name="properties[Color]"]:checked')?.value || 'N/A';
+        document.getElementById('sum-sleeves').textContent = document.querySelector('input[name="properties[Sleeves]"]:checked')?.value || 'N/A';
+        
+        const embWanted = document.querySelector('input[name="embroidery_choice"]:checked')?.value;
+        if(embWanted === 'Yes') {
+          const embText = document.getElementById('emb-text').value;
+          document.getElementById('sum-emb').textContent = embText ? `Yes: "${embText}" (+ $10)` : 'Yes (No name provided)';
+        } else {
+          document.getElementById('sum-emb').textContent = 'None';
+        }
+      }
+    }
+
+    nextBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        let n = parseInt(btn.getAttribute('data-next'));
+        updateStep(n);
+      });
+    });
+
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        let p = parseInt(btn.getAttribute('data-prev'));
+        updateStep(p);
+      });
+    });
+
+    // Prevent immediate form submission if base product not set, but standard JS validation can happen
+    form.addEventListener('submit', (e) => {
+      const baseProductInput = form.querySelector('input[name="id"]');
+      if (!baseProductInput || !baseProductInput.value) {
+        e.preventDefault();
+        alert('Cannot create custom dress: The store administrator needs to link a base product in the theme editor.');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Dress Builder",
+  "tag": "section",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Design Your Custom Dress"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Follow the steps below to create a unique outfit for your little one."
+    },
+    {
+      "type": "product",
+      "id": "base_product",
+      "label": "Base Custom Dress Product",
+      "info": "CRITICAL: You must select a base product here. This product's price and ID will be used when adding the custom dress to the cart."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Dress Builder"
+    }
+  ]
+}
+{% endschema %}
