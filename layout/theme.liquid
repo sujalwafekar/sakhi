@@ -6,6 +6,8 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    {% render 'shogun-optimizer' %}
+
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
