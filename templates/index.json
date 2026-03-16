@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */ {
+ */
+{
   "sections": {
     "sakhi_hero": {
       "type": "sakhi-hero",
@@ -15,9 +16,9 @@
         "heading": "Handmade Dresses for Your Little One",
         "subheading": "Beautiful frocks crafted with love and comfort. Soft fabrics, unique designs, made just for your child.",
         "button_1_label": "Shop Dresses",
-        "button_1_link": "shopify:\/\/collections\/all",
+        "button_1_link": "shopify://collections/all",
         "button_2_label": "Customize a Dress",
-        "button_2_link": "shopify:\/\/pages\/custom-dress",
+        "button_2_link": "shopify://pages/custom-dress",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -121,7 +122,7 @@
         "heading": "Design a Dress Just for Your Child",
         "description": "Create a one-of-a-kind dress your little one will love. Pick colors, sleeves, and even add their name with hand embroidery.",
         "cta_label": "Start Designing",
-        "cta_link": "shopify:\/\/pages\/custom-dress",
+        "cta_link": "shopify://pages/custom-dress",
         "padding-block-start": 60,
         "padding-block-end": 60
       }
@@ -179,7 +180,7 @@
         "heading": "Our Handmade Story",
         "text": "<p>Every Sakhi dress begins its journey in our local workshop, where skilled artisans and stitching students pour their heart into every stitch.</p><p>We believe in the beauty of handmade. Each piece carries the warmth of human touch, the precision of trained hands, and the love of creating something truly special for your child.</p>",
         "cta_label": "Learn More",
-        "cta_link": "shopify:\/\/pages\/about",
+        "cta_link": "shopify://pages/about",
         "padding-block-start": 60,
         "padding-block-end": 60
       }
@@ -283,16 +284,20 @@
       "type": "sakhi-instagram",
       "blocks": {
         "ig1": {
-          "type": "image"
+          "type": "image",
+          "settings": {}
         },
         "ig2": {
-          "type": "image"
+          "type": "image",
+          "settings": {}
         },
         "ig3": {
-          "type": "image"
+          "type": "image",
+          "settings": {}
         },
         "ig4": {
-          "type": "image"
+          "type": "image",
+          "settings": {}
         }
       },
       "block_order": [
@@ -315,9 +320,9 @@
         "heading": "Make Your Child's Outfit Special",
         "subheading": "Browse our collection of handmade ready-to-wear dresses or design a custom piece.",
         "button_1_label": "Shop Dresses",
-        "button_1_link": "shopify:\/\/collections\/all",
+        "button_1_link": "shopify://collections/all",
         "button_2_label": "Customize a Dress",
-        "button_2_link": "shopify:\/\/pages\/custom-dress",
+        "button_2_link": "shopify://pages/custom-dress",
         "padding-block-start": 80,
         "padding-block-end": 80
       }

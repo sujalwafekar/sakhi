@@ -11,64 +11,6 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
-      "blocks": {
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "✨ Free Shipping on Orders Above ₹999 | 100% Organic Cotton",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "uppercase"
-          },
-          "blocks": {}
-        },
-        "announcement_2ndMsg": {
-          "type": "_announcement",
-          "settings": {
-            "text": "👶 New Arrivals — Premium Baby Clothing Collection",
-            "link": "shopify://collections/all",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "uppercase"
-          },
-          "blocks": {}
-        },
-        "announcement_3rdMsg": {
-          "type": "_announcement",
-          "settings": {
-            "text": "🎀 Use Code SAKHI10 for 10% Off Your First Order",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "uppercase"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "announcement_BxgCk9",
-        "announcement_2ndMsg",
-        "announcement_3rdMsg"
-      ],
-      "name": "t:names.announcement_bar",
-      "settings": {
-        "speed": 4,
-        "section_width": "full-width",
-        "color_scheme": "scheme-5",
-        "divider_width": 0,
-        "padding-block-start": 10,
-        "padding-block-end": 10
-      }
-    },
     "header_section": {
       "type": "header",
       "blocks": {
@@ -111,6 +53,7 @@
         "logo_position": "center",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -127,6 +70,10 @@
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "",
         "color_scheme_transparent": "scheme-6",
@@ -140,7 +87,6 @@
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
     "header_section"
   ]
 }
