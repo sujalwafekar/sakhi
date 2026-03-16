@@ -25,9 +25,9 @@
           {% if block.settings.image != blank %}
             {{ block.settings.image | image_url: width: 400 | image_tag: alt: 'Instagram photo', class: 'sakhi-ig__img', loading: 'lazy' }}
           {% else %}
-            <div class="sakhi-ig__placeholder">
-              {{ 'image' | placeholder_svg_tag }}
-            </div>
+            {% assign placeholder_num = forloop.index | modulo: 4 %}
+            {% if placeholder_num == 0 %}{% assign placeholder_num = 4 %}{% endif %}
+            <img src="{{ 'sakhi_community_' | append: placeholder_num | append: '.png' | asset_url }}" loading="lazy" class="sakhi-ig__img" alt="Community Photo">
           {% endif %}
           <div class="sakhi-ig__overlay">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
