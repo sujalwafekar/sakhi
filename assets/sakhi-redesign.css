@@ -111,17 +111,23 @@ header-component,
 .header,
 .header-section,
 [class*="header"] header {
-    background: rgba(255, 248, 243, 0.97) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--sakhi-border) !important;
-    box-shadow: 0 1px 20px rgba(44, 34, 32, 0.04) !important;
-    position: relative !important;
-    z-index: 100 !important;
+    background: rgba(255, 248, 243, 0.65) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid rgba(240, 228, 220, 0.4) !important;
+    box-shadow: 0 4px 30px rgba(193, 122, 142, 0.05) !important;
+    z-index: 1000 !important;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease !important;
+}
+
+/* Slightly darken/blur the background more when actively sticky scrolling */
+.header[data-sticky-state='active'] {
+    background: rgba(255, 248, 243, 0.85) !important;
+    box-shadow: 0 8px 32px rgba(193, 122, 142, 0.08) !important;
 }
 
 .header__row {
-    padding-block: 12px;
+    padding-block: 8px !important;
 }
 
 /* Logo area */
