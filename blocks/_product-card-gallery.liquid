@@ -25,6 +25,9 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+      <div class="product-badges__badge product-badges__badge--rectangle" style="background: var(--sakhi-gold, #D4A853); color: var(--sakhi-warm-dark, #2C2220); margin-top: 4px;">
+        Handmade
+      </div>
     </div>
     {%  if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add', product: product, section_id: section.id %}

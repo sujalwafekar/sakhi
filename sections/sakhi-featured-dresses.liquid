@@ -35,8 +35,9 @@
                 </div>
               {% endif %}
               {% if product.compare_at_price > product.price %}
-                <span class="sakhi-featured__badge">Sale</span>
+                <span class="sakhi-featured__badge sakhi-featured__badge--sale">Sale</span>
               {% endif %}
+              <span class="sakhi-featured__badge sakhi-featured__badge--handmade" {% if product.compare_at_price > product.price %}style="top: 40px;"{% endif %}>Handmade</span>
               {% form 'product', product, class: 'sakhi-featured__quick-add-form' %}
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                 <button type="submit" class="sakhi-featured__quick-view" aria-label="Add {{ product.title }} to cart" {% if product.available == false %}disabled{% endif %}>
@@ -169,14 +170,23 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    background: var(--sakhi-blush, #C17A8E);
-    color: #FFFFFF;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.04em;
     padding: 4px 14px;
     border-radius: 100px;
     text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .sakhi-featured__badge--sale {
+    background: var(--sakhi-blush, #C17A8E);
+    color: #FFFFFF;
+  }
+
+  .sakhi-featured__badge--handmade {
+    background: var(--sakhi-gold, #D4A853);
+    color: var(--sakhi-warm-dark, #2C2220);
   }
 
   .sakhi-featured__quick-add-form {
