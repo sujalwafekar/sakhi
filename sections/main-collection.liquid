@@ -24,6 +24,41 @@
 
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+
+<div class="sakhi-collection-hero">
+  <div class="sakhi-collection-hero__inner">
+    <h1 class="sakhi-collection-hero__title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="sakhi-collection-hero__desc">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="sakhi-mock-filters-wrapper">
+  <div class="sakhi-mock-filters">
+    <div class="sakhi-mock-filter-group">
+      <span class="sakhi-mock-filter-label">Age:</span>
+      <button class="sakhi-mock-filter-btn active" type="button">0-1Y</button>
+      <button class="sakhi-mock-filter-btn" type="button">1-3Y</button>
+      <button class="sakhi-mock-filter-btn" type="button">3-5Y</button>
+      <button class="sakhi-mock-filter-btn" type="button">5+Y</button>
+    </div>
+    <div class="sakhi-mock-filter-group">
+      <span class="sakhi-mock-filter-label">Occasion:</span>
+      <button class="sakhi-mock-filter-btn" type="button">Play</button>
+      <button class="sakhi-mock-filter-btn" type="button">Party</button>
+      <button class="sakhi-mock-filter-btn" type="button">Sleep</button>
+    </div>
+    <div class="sakhi-mock-filter-group sakhi-mock-filter-group--sort">
+      <span class="sakhi-mock-filter-label">Sort:</span>
+      <select class="sakhi-mock-select">
+        <option>Recommended</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+</div>
 <results-list
   class="section product-grid-container color-{{ section.settings.color_scheme }}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
@@ -35,12 +70,14 @@
   <div
     class="collection-wrapper grid gap-style{% if section.settings.product_grid_width == 'full-width' %} collection-wrapper--grid-full-width{% endif %}"
   >
+    {% comment %}
     {% content_for 'block',
       type: 'filters',
       id: 'filters',
       results: collection,
       results_size: collection.products_count
     %}
+    {% endcomment %}
 
     {% assign products_per_page = 24 %}
 

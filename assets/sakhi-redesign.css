@@ -726,3 +726,143 @@ html {
 .card:nth-child(8) {
     animation-delay: 0.4s;
 }
+
+/* ── Product Grid Overrides (Collection Page) ────────────────── */
+ul.product-grid {
+    --product-grid-gap-mobile: 16px 8px !important;
+    --product-grid-gap-desktop: 32px 20px !important;
+    gap: var(--product-grid-gap) !important;
+    margin-top: 24px;
+}
+
+@media screen and (max-width: 749px) {
+    ul.product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .sakhi-mock-filters-wrapper {
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    ul.product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    }
+
+    .sakhi-mock-filters-wrapper {
+        margin-bottom: 16px;
+    }
+}
+
+/* ── Collection Page Elements ────────────────────────────────── */
+.sakhi-collection-hero {
+    background: linear-gradient(135deg, var(--sakhi-blush-light, #FFF0F3) 0%, rgba(255, 248, 243, 0.5) 100%);
+    padding: 32px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--sakhi-border, #F0E4DC);
+    margin-bottom: 24px;
+}
+
+.sakhi-collection-hero__inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sakhi-collection-hero__title {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin: 0 0 8px;
+}
+
+.sakhi-collection-hero__desc {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 15px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+}
+
+.sakhi-mock-filters-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 0 16px;
+}
+
+.sakhi-mock-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 12px rgba(44, 34, 32, 0.03);
+}
+
+.sakhi-mock-filter-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sakhi-mock-filter-group--sort {
+    margin-left: auto;
+}
+
+.sakhi-mock-filter-label {
+    font-family: var(--sakhi-font-heading, 'Playfair Display', serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sakhi-warm-dark, #2C2220);
+    margin-right: 4px;
+}
+
+.sakhi-mock-filter-btn {
+    background: #FFFFFF;
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-gray, #4A3F3A);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sakhi-mock-filter-btn:hover {
+    border-color: var(--sakhi-blush, #C17A8E);
+    color: var(--sakhi-blush-dark, #A8637A);
+}
+
+.sakhi-mock-filter-btn.active {
+    background: var(--sakhi-blush, #C17A8E);
+    color: #FFFFFF;
+    border-color: var(--sakhi-blush, #C17A8E);
+}
+
+.sakhi-mock-select {
+    font-family: var(--sakhi-font-body, 'Lora', serif);
+    font-size: 13px;
+    color: var(--sakhi-warm-dark, #2C2220);
+    border: 1px solid var(--sakhi-border, #F0E4DC);
+    border-radius: 20px;
+    padding: 6px 28px 6px 12px;
+    background: #FFFFFF;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A3F3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 14px;
+}
+
+@media screen and (max-width: 749px) {
+    .sakhi-mock-filter-group--sort {
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
